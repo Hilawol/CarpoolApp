@@ -2,8 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 
 const usersRoute = require('./server/routes/users.routes');

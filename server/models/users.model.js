@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// var validator = require('validator');
+var validator = require('validator');
 // const bcrypt = require('bcryptjs');
 // const jwt = require('jsonwebtoken');
 
@@ -27,17 +27,17 @@ const userSchema = new mongoose.Schema({
       }
     }
   },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minLength: 8,
-    validate(value) {
-      if (!validator.isStrongPassword(value)) {
-        throw new Error('Please provide a strong password. MinLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1');
-      }
-    }
-  },
+  // password: {
+  //   type: String,
+  //   required: true,
+  //   trim: true,
+  //   minLength: 8,
+  //   validate(value) {
+  //     if (!validator.isStrongPassword(value)) {
+  //       throw new Error('Please provide a strong password. MinLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1');
+  //     }
+  //   }
+  // },
   // tokens: [{
   //   token: {
   //     type: String,

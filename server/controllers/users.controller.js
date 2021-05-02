@@ -18,25 +18,26 @@ const getUser = async (req, res) => {
     }
     return res.send(user);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ "error": error });
   }
 }
 
 const addUser = async (req, res) => {
   try {
-    const { id, firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email } = req.body;
     const user = new userModel({
-      id: id,
       firstName: firstName,
       lastName: lastName,
-      email: email,
-      password: password
+      email: email
     });
-    const token = await user.generateAuthToken();
+    // const token = await user.generateAuthToken();
 
     const result = await user.save();
-    return res.status(201).json({ user, token });
+    // return res.status(201).json({ user, token });
+    return res.status(201).json({ user });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ "error": error })
   }
 }

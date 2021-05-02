@@ -6,6 +6,7 @@ const usersController = require('../controllers/users.controller');
 router.get('/', (req, res) => {
   usersController.getAllUsers(req, res);
 }).post('/', (req, res) => {
+  console.log(req);
   usersController.addUser(req, res);
 });
 
