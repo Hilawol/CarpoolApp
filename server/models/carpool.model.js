@@ -25,21 +25,21 @@ const carpoolSchema = new mongoose.Schema({
     dt: { //dt - departure time
       type: Date,
       required: true
-    }
-  }],
-  cars: [{
-    driver: {
-      name: {
-        type: String,
-        required: true,
-        minLength: 3
-      }
     },
-    capacity: {
-      type: Number,
-      min: 1
-    },
-    passengers: []
+    cars: [{
+      driver: {
+        name: {
+          type: String,
+          required: true,
+          minLength: 3
+        }
+      },
+      capacity: {
+        type: Number,
+        min: 1
+      },
+      passengers: []
+    }]
   }]
 })
 
