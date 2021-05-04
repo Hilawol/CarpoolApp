@@ -25,6 +25,13 @@ const getUser = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
+    console.log("addusr")
+    const usr = await userModel.findOne({ email: req.body.email })
+    console.log("usr:", usr)
+    if (usr) {
+      return res.status(406).json({ "error": "Email already exsits." });
+    }
+
     const { firstName, lastName, email } = req.body;
     const user = new userModel({
       firstName: firstName,
@@ -32,7 +39,6 @@ const addUser = async (req, res) => {
       email: email
     });
     // const token = await user.generateAuthToken();
-
     const result = await user.save();
     // return res.status(201).json({ user, token });
     return res.status(201).json({ user });
