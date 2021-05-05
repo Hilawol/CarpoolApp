@@ -1,0 +1,62 @@
+.loginPage{
+  display: flex;
+  background-color:var(--light-pink);
+  height: 100vh;
+  width: 100vw;
+  font-size: 1rem;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  height:max-content;
+  background-color: white;
+  margin:auto;
+  padding:2rem;
+  box-shadow: var(--boxShadow);
+}
+
+input{
+  border: none;
+  margin:1rem 0;
+  border-bottom: 1px solid black;
+}
+
+hr{
+  margin:1rem 0;
+  color: rgba(0, 0, 0, 0.25);
+  opacity: 0.2;
+}
+
+.cardHeader, .actionDiv{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.actionDiv{
+  flex-direction: column;
+}
+
+i{
+  transition: transform 0.3s;
+  font-size: 1.5rem;
+}
+
+i:hover  {
+  transform:rotate(-90deg);
+}
+
+.cardFooter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errMsg{
+  align-self: center;
+  color: red;
+  margin:0 auto;
+  font-size: 0.8rem;
+}

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var validator = require('validator');
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
 
@@ -27,17 +27,17 @@ const userSchema = new mongoose.Schema({
       }
     }
   },
-  // password: {
-  //   type: String,
-  //   required: true,
-  //   trim: true,
-  //   minLength: 8,
-  //   validate(value) {
-  //     if (!validator.isStrongPassword(value)) {
-  //       throw new Error('Please provide a strong password. MinLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1');
-  //     }
-  //   }
-  // },
+  password: {
+    type: String,
+    required: true,
+    trim: true,
+    minLength: 8,
+    validate(value) {
+      if (!validator.isStrongPassword(value)) {
+        throw new Error('Please provide a strong password. MinLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1');
+      }
+    }
+  },
   // tokens: [{
   //   token: {
   //     type: String,
@@ -47,37 +47,40 @@ const userSchema = new mongoose.Schema({
 })
 
 // //this will be avialable to model instances. Can not be an arrow function!
-// userSchema.methods.generateAuthToken = async function () {
-//   const user = this;
-//   const token = jwt.sign({ _id: user._id.toString() }, 'mysecretstring');
-//   user.tokens = user.tokens.concat({ token });//adds to the tokens array
-//   await user.save(); //saves the tokens
-//   return token;
-// }
+userSchema.methods.generateAuthToken = async function () {//instance method
+  const user = this;
+  const token = jwt.sign({ _id: user._id.toString() }, 'mysecretstring');
+  // user.tokens = user.tokens.concat({ token });//adds to the tokens array
+  await user.save(); //saves the tokens
+  return token;
+}
 
 // //statics available to the model
-// userSchema.statics.findByCredentials = async (email, password) => {
-//   const user = await User.findOne({ email });
-//   if (!user) {
-//     throw new Error('unable to login');
-//   }
-//   console.log(user, email, password);
-//   const isMatch = await bcrypt.compare(password, user.password);
-//   if (!isMatch) {
-//     throw new Error('unable to login');
-//   }
-//   return user;
-// }
+userSchema.statics.findByCredentials = async (email, password) => {//model methods
+  try {
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      throw new Error('Unable to login');
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      throw new Error('Unable to login');
+    }
+    return user;
+  } catch (error) {
+    console.log(error)
+  }
 
-// //Hash password before saving it to db.
-// userSchema.pre('save', async function (next) {//Can not be arrow function!!!!
-//   console.log("pre");
-//   const user = this;//the current user being saved.
-//   if (user.isModified('password')) {
-//     user.password = await bcrypt.hash(user.password, 8);
-//   }
-//   next();//we must call next at the end,otherwise will hang and not save the user. 
-// });
+}
+
+//Hash password before saving it to db.
+userSchema.pre('save', async function (next) {
+  const user = this;//the current user being saved.
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();//we must call next at the end,otherwise will hang and not save the user. 
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

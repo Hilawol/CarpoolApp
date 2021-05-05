@@ -31,7 +31,7 @@ function Navbar() {
         <div className="navBtn" ><Link className={selected === "home" ? "selected" : ''} to="/">Home</Link></div>
         {/* <div className="navBtn" ><Link className={selected === "translation" ? "selected" : ''} to="/translation">Translate</Link></div>
         <div className="navBtn" ><Link className={selected === "favorites" ? "selected" : ''} to="/favorites">Favorites</Link></div> */}
-        <div className="navBtn" >Login</div>
+        <div className="navBtn" ><Link className={selected === "login" ? "selected" : ''} to="/login">Login</Link></div>
         <div className="navBtn" ><Link className={selected === "signup" ? "selected" : ''} to="/signup">Get Started</Link></div>
       </div>
     </div>

@@ -5,10 +5,13 @@ const usersController = require('../controllers/users.controller');
 
 router.get('/', (req, res) => {
   usersController.getAllUsers(req, res);
-}).post('/', (req, res) => {
-  console.log(req);
+}).post('/', (req, res) => { //Create new user
   usersController.addUser(req, res);
-});
+}).post('/login', (req, res) => {
+  usersController.loginUser(req, res);
+}
+
+);
 
 // .get('/me', auth, (req, res) => {
 //   res.send(req.user);

@@ -76,7 +76,7 @@ function SignUpPage() {
   }
 
   const onLoginClick = () => {
-    console.log("login");
+    history.push('/login');
   }
 
   return (

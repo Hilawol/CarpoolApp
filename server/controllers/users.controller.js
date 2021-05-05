@@ -1,4 +1,6 @@
 const userModel = require('../models/users.model');
+const bcrypt = require('bcryptjs');
+const User = require('../models/users.model');
 
 const getAllUsers = async (req, res) => {
   try {
@@ -25,18 +27,17 @@ const getUser = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    console.log("addusr")
     const usr = await userModel.findOne({ email: req.body.email })
-    console.log("usr:", usr)
     if (usr) {
       return res.status(406).json({ "error": "Email already exsits." });
     }
 
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, password } = req.body;
     const user = new userModel({
-      firstName: firstName,
-      lastName: lastName,
-      email: email
+      firstName,
+      lastName,
+      email,
+      password
     });
     // const token = await user.generateAuthToken();
     const result = await user.save();
@@ -48,8 +49,19 @@ const addUser = async (req, res) => {
   }
 }
 
+const loginUser = async (req, res) => {
+  try {
+    const user = await User.findByCredentials(req.body.email, req.body.password);
+    const token = await user.generateAuthToken();
+    res.status(200).json({ user, token });
+  } catch (error) {
+    res.status(400).json({ error: "Invalid login credentials" });
+  }
+}
+
 module.exports = {
   getAllUsers,
   addUser,
+  loginUser,
   getUser
 }
