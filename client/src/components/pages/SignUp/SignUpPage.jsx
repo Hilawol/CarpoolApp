@@ -83,7 +83,7 @@ function SignUpPage() {
     <div className="signUpPage">
       <div className="card">
         <div className="cardHeader">
-          <Link to='/' > <i className="fas fa-times"></i></Link>
+          <Link to='/' > <i className="fas fa-times closeBtn"></i></Link>
         </div>
         <span>Sign Up</span>
         <hr />

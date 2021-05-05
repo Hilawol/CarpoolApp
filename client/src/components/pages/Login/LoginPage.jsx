@@ -48,8 +48,9 @@ function LoginPage() {
       password
     }
     try {
-      const data = await axios.post('http://localhost:5000/api/users/login', user);
-      history.push('/');
+      const result = await axios.post('http://localhost:5000/api/users/login', user);
+      // console.log(data);
+      history.push(`/user/${result.data.user._id}`);
     } catch (error) {
       if (error.response.status === 400) {
         setErrMsg(error.response.data.error);
@@ -63,7 +64,7 @@ function LoginPage() {
     <div className="loginPage">
       <div className="card">
         <div className="cardHeader">
-          <Link to='/' > <i className="fas fa-times"></i></Link>
+          <Link to='/' > <i className="fas fa-times closeBtn"></i></Link>
         </div>
         <span>Login</span>
         <hr />

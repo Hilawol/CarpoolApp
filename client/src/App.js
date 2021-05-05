@@ -6,6 +6,7 @@ import Navbar from '../src/components/utils/Navbar/Navbar'
 import LandingPage from '../src/components/pages/Landing/LandingPage'
 import SignUpPage from '../src/components/pages/SignUp/SignUpPage'
 import LoginPage from '../src/components/pages/Login/LoginPage'
+import UserPage from './components/pages/UserPage/UserPage';
 
 function App() {
 
@@ -13,9 +14,10 @@ function App() {
     <div>
       <BrowserRouter>
         {/* <Navbar /> */}
-        <Route exact path='/' component={LandingPage, Navbar} />
-        <Route exact path='/signup' component={SignUpPage} />
-        <Route exact path='/login' component={LoginPage} />
+        <Route path='/' exact component={LandingPage, Navbar} />
+        <Route path='/user/:id' exact component={UserPage} />
+        <Route path='/signup' exact component={SignUpPage} />
+        <Route path='/login' exact component={LoginPage} />
         {/* <Route exact path='/create-carpool' component={CreateCarpool} /> */}
       </BrowserRouter>
     </div>

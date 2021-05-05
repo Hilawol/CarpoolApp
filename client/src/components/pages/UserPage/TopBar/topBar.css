@@ -1,0 +1,34 @@
+*{
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+
+#topBar{
+  width:100vw;
+  height:10vh;
+  /* background-color: var(--light-pink); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(240, 239, 238);
+  box-shadow:  0 10px 10px -12px rgba(0, 0, 0, 0.25);
+}
+
+.topBarBtn{
+  color:#194350;
+  font-size: 1.3rem;
+}
+.sidebarBtn{
+  font-size: 35px;
+  margin:20px;
+}
+
+.sidebarBtn:hover{
+  color:rgb(249, 226, 54);
+  cursor: pointer;
+}
+
+.active{
+  color:rgb(249, 226, 54);
+}
