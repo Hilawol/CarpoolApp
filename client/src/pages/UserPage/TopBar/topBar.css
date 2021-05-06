@@ -5,7 +5,7 @@
 }
 
 #topBar{
-  width:100vw;
+  /* width:100vw; */
   height:10vh;
   /* background-color: var(--light-pink); */
   display: flex;

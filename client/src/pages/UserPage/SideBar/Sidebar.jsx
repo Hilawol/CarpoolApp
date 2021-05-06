@@ -1,6 +1,6 @@
 import React from 'react';
 import './sidebar.css';
-import IconBtn from '../../../utils/Button/IconBtn';
+import IconBtn from '../../../components/utils/Button/IconBtn';
 
 function Sidebar({ onBtnClick }) {
 

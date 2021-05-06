@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import validator from 'validator';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import Button from '../../utils/Button/Button';
-import Input from '../../utils/InputText/Input';
+import Button from '../../components/utils/Button/Button';
+import Input from '../../components/utils/InputText/Input';
 import './loginPage.css';
 
 function LoginPage() {
@@ -48,7 +48,7 @@ function LoginPage() {
       password
     }
     try {
-      const result = await axios.post('http://localhost:5000/api/users/login', user);
+      const result = await axios.post('https:/carpool-il.herokuapp.com/api/users/login', user);
       // console.log(data);
       history.push(`/user/${result.data.user._id}`);
     } catch (error) {

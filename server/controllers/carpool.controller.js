@@ -8,19 +8,22 @@ const getCarpoolById = async (req, res) => {
 
 const addCarpool = async (req, res) => {
   try {
-    const { name } = req.body;
-    console.log(name);
+    console.log("addcarpool")
+    const { name, from, to, date } = req.body;
     const carpool = new carpoolModel(
       {
-        name: name
+        name,
+        from,
+        to,
+        date: new Date(date)
       }
     )
     carpool.save();
-    res.send(carpool);
+    res.status(201).json(carpool);
   } catch (error) {
-
+    console.log(error);
+    return res.status(500).json({ "error": error })
   }
-
 }
 
 module.exports = {

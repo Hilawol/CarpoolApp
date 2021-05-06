@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../../../utils/Button/Button'
+import Button from '../../../components/utils/Button/Button'
 import './topBar.css'
 
 function TopBar({ onBtnClick }) {
