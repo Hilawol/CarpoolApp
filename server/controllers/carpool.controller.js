@@ -22,16 +22,10 @@ const getCarpoolById = async (req, res) => {
 const addCarpool = async (req, res) => {
   try {
     console.log("addcarpool", req.body);
-    const { name, from, to, trip, date } = req.body;
-    const carpool = new carpoolModel(
-      {
-        name,
-        from,
-        to,
-        trip,
-        date
-      }
-    )
+    const carpool = new carpoolModel({
+      ...req.body,
+      owner: req.user._id
+    })
     carpool.save();
     res.status(201).json(carpool);
   } catch (error) {

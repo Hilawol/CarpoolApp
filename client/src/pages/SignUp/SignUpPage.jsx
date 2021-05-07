@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import validator from 'validator';
 import { Link, useHistory } from 'react-router-dom'
-import axios from 'axios'
 import Button from '../../components/utils/Button/Button'
 import Input from '../../components/utils/InputText/Input'
 import './signUpPage.css'
+import Api from '../../Api/Api'
+
 function SignUpPage() {
 
   const [email, setEmail] = useState('');
@@ -17,18 +18,7 @@ function SignUpPage() {
 
   const passwordHandler = (event) => {
     setErrMsg(null);
-    const value = event.currentTarget.value;
-    if (value !== '') {
-      if (value.length > password.length) {
-        setPassword(password.concat(value.slice(-1)))//adds the last added charachter if added one
-      }
-      else {//deleted a charachter
-        setPassword(password.slice(0, password.length - 1));//deleted the last charachter
-      }
-    }
-    else {
-      setPassword('');
-    }
+    setPassword(event.currentTarget.value);
   }
 
   const nameHandler = (event) => {
@@ -65,8 +55,12 @@ function SignUpPage() {
       password
     }
     try {
-      const data = await axios.post('https:/carpool-il.herokuapp.com/api/users', user);
-      history.push('/');
+      const { data } = await Api.post('users/signup', user);
+      let token;
+      token = data?.token;
+      console.log("token:", token);
+      sessionStorage.setItem('token', JSON.stringify(token));
+      history.push(`/myProfile`);
     } catch (error) {
       if (error.response.status === 406) {
         setErrMsg(error.response.data.error);
@@ -87,10 +81,10 @@ function SignUpPage() {
         </div>
         <span>Sign Up</span>
         <hr />
-        <Input id="firstName" placeholder="First Name" onChange={nameHandler} value={firstName} />
-        <Input id="lastName" placeholder="Last Name" onChange={nameHandler} value={lastName} />
-        <Input placeholder="Email" onChange={emailHandler} value={email} />
-        <Input placeholder="Password" onChange={passwordHandler} value={password ? '*'.repeat(password.length) : ''} />
+        <Input type="text" id="firstName" placeholder="First Name" onChange={nameHandler} value={firstName} />
+        <Input type="text" id="lastName" placeholder="Last Name" onChange={nameHandler} value={lastName} />
+        <Input type="email" placeholder="Email" onChange={emailHandler} value={email} />
+        <Input type="password" placeholder="Password" onChange={passwordHandler} />
         <div className="actionDiv">
           {errMsg ? <p className="errMsg">{errMsg}</p> : null}
           <Button type="submit" text="SIGN UP" variant="solid" onClick={onSignUpClick} />

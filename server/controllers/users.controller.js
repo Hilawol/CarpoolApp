@@ -11,6 +11,10 @@ const getAllUsers = async (req, res) => {
   }
 }
 
+const getUserProfile = async (req, res) => {
+  res.send(req.user);
+}
+
 const getUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -25,13 +29,12 @@ const getUser = async (req, res) => {
   }
 }
 
-const addUser = async (req, res) => {
+const signupUser = async (req, res) => {
   try {
     const usr = await userModel.findOne({ email: req.body.email })
     if (usr) {
       return res.status(406).json({ "error": "Email already exsits." });
     }
-
     const { firstName, lastName, email, password } = req.body;
     const user = new userModel({
       firstName,
@@ -39,10 +42,9 @@ const addUser = async (req, res) => {
       email,
       password
     });
-    // const token = await user.generateAuthToken();
     const result = await user.save();
-    // return res.status(201).json({ user, token });
-    return res.status(201).json({ user });
+    const token = await user.generateAuthToken();
+    return res.status(201).json({ user, token });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ "error": error })
@@ -59,9 +61,30 @@ const loginUser = async (req, res) => {
   }
 }
 
+const logoutUser = async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens.filter(token => token.token !== req.token);
+    await req.user.save();
+    res.send();
+  } catch (error) {
+    res.status(500).send();
+  }
+}
+
+const deleteUserProfile = async (req, res) => {
+  try {
+    await req.user.remove();
+    res.send(req.user);
+  } catch (error) {
+    res.status(500).send();
+  }
+}
+
 module.exports = {
-  getAllUsers,
-  addUser,
+  getUserProfile,
+  signupUser,
   loginUser,
-  getUser
+  getUser,
+  logoutUser,
+  deleteUserProfile
 }

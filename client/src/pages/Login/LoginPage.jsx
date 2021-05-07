@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import validator from 'validator';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
 import Button from '../../components/utils/Button/Button';
 import Input from '../../components/utils/InputText/Input';
 import './loginPage.css';
+import Api from '../../Api/Api'
 
 function LoginPage() {
 
@@ -48,10 +48,19 @@ function LoginPage() {
       password
     }
     try {
-      const result = await axios.post('https:/carpool-il.herokuapp.com/api/users/login', user);
+      const { data } = await Api.post('users/login', user);
+      console.log(data)
+      let token;
+      token = data?.token;
+      console.log("token:", token);
+      if (!token) {
+        throw new Error();
+      }
+      sessionStorage.setItem('token', JSON.stringify(token));
       // console.log(data);
-      history.push(`/user/${result.data.user._id}`);
+      history.push(`/myProfile`);
     } catch (error) {
+      console.log(error);
       if (error.response.status === 400) {
         setErrMsg(error.response.data.error);
       }
@@ -59,7 +68,9 @@ function LoginPage() {
     }
   }
 
-
+  const onSignUpClick = async () => {
+    console.log("sogn up");
+  }
   return (
     <div className="loginPage">
       <div className="card">
@@ -68,13 +79,17 @@ function LoginPage() {
         </div>
         <span>Login</span>
         <hr />
-        <Input placeholder="Email" onChange={emailHandler} value={email} />
-        <Input placeholder="Password" onChange={passwordHandler} value={password ? '*'.repeat(password.length) : ''} />
+        <Input type="email" placeholder="Email" onChange={emailHandler} value={email} />
+        <Input type="password" placeholder="Password" onChange={passwordHandler} />
         <div className="actionDiv">
           {errMsg ? <p className="errMsg">{errMsg}</p> : null}
           <Button type="submit" text="Login" variant="solid" onClick={onLoginClick} />
         </div>
         <hr />
+        <div className="cardFooter">
+          <span>Don't have an account yet?</span>
+          <Button text="SIGN UP" variant="text" onClick={onSignUpClick} />
+        </div>
       </div>
     </div>
   )

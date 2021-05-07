@@ -25,7 +25,7 @@ function App() {
         <BrowserRouter>
           {/* <Navbar /> */}
           <Route path='/' exact component={LandingPage, Navbar} />
-          <Route path='/user/:id' exact component={UserPage} />
+          <Route path='/myProfile' exact component={UserPage} />
           <Route path='/signup' exact component={SignUpPage} />
           <Route path='/login' exact component={LoginPage} />
           <Route path='/carpool/:id' exact component={Carpool} />

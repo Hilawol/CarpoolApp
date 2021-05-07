@@ -7,9 +7,11 @@ const carpoolSchema = new mongoose.Schema({
     required: true,
     minLength: 3
   },
-  // owner: {
-  //   id: mongoose.SchemaTypes.ObjectId
-  // },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
   from: {
     type: String
   },
@@ -31,7 +33,10 @@ const carpoolSchema = new mongoose.Schema({
     default: []
   },
   users: {
-    type: [mongoose.SchemaTypes.ObjectId],
+    type: [{
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'User'
+    }],
     default: []
   }
 

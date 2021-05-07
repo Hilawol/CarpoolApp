@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/users.controller');
+const auth = require('../middlewares/auth');
 // const auth = require('../middleware/auth');
 
-router.get('/', (req, res) => {
-  usersController.getAllUsers(req, res);
-}).post('/', (req, res) => { //Create new user
-  usersController.addUser(req, res);
+router.get('/me', auth, (req, res) => {
+  usersController.getUserProfile(req, res);
+}).delete('/me', auth, (req, res) => {
+  usersController.deleteUserProfile(req, res);
+}).post('/signup', (req, res) => { //Create new user
+  usersController.signupUser(req, res);
 }).post('/login', (req, res) => {
   usersController.loginUser(req, res);
-}
-
-);
+}).post('/logout', auth, (req, res) => {
+  usersController.logoutUser(req, res);
+});
 
 // .get('/me', auth, (req, res) => {
 //   res.send(req.user);

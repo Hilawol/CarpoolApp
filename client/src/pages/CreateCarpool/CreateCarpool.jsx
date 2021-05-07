@@ -55,18 +55,6 @@ function CreateCarpool({ visible, onCloseCreateCarpool }) {
 
   const nameHandler = (event) => {
     setName(event.currentTarget.value);
-    // const value = event.currentTarget.value;
-    // if (value !== '') {
-    //   if (value.length > password.length) {
-    //     setPassword(password.concat(value.slice(-1)))//adds the last added charachter if added one
-    //   }
-    //   else {//deleted a charachter
-    //     setPassword(password.slice(0, password.length - 1));//deleted the last charachter
-    //   }
-    // }
-    // else {
-    //   setPassword('');
-    // }
   }
 
   const fromHandler = (event) => {

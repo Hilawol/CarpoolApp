@@ -38,19 +38,33 @@ const userSchema = new mongoose.Schema({
       }
     }
   },
-  // tokens: [{
-  //   token: {
-  //     type: String,
-  //     required: true
-  //   }
-  // }]
+  tokens: [{
+    token: {
+      type: String,
+      required: true,
+    }
+  }]
+});
+
+userSchema.virtual('owenedCarpools', {
+  ref: 'Carpool',
+  localField: '_id',
+  foreignField: 'owner'
 })
+
+userSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+  delete userObject.password;
+  delete userObject.tokens;
+  return userObject;
+}
 
 // //this will be avialable to model instances. Can not be an arrow function!
 userSchema.methods.generateAuthToken = async function () {//instance method
   const user = this;
   const token = jwt.sign({ _id: user._id.toString() }, 'mysecretstring');
-  // user.tokens = user.tokens.concat({ token });//adds to the tokens array
+  user.tokens = user.tokens.concat({ token });//adds to the tokens array
   await user.save(); //saves the tokens
   return token;
 }
