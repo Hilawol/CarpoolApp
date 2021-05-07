@@ -3,7 +3,6 @@ const usersModel = require('../models/users.model');
 
 
 const getAll = async (req, res) => {
-
   try {
     const carpools = await carpoolModel.find({});
     res.send(carpools);
@@ -14,6 +13,7 @@ const getAll = async (req, res) => {
 }
 
 const getCarpoolById = async (req, res) => {
+  console.log("getCarpoolById");
   const { id } = req.params;
   console.log(id);
   res.send();
@@ -59,9 +59,25 @@ const addUser = async (req, res) => {
   }
 }
 
+const getAllUsers = async (req, res) => {
+  console.log("getAllusers");
+  try {
+    const carpoolId = req.params.id;
+    try {
+      carpool = await carpoolModel.findById(carpoolId);
+    } catch (error) {
+      res.status(404).send();
+    }
+    res.json({ "users": carpool.users });
+  } catch (error) {
+
+  }
+}
+
 module.exports = {
   getAll,
   getCarpoolById,
   addCarpool,
-  addUser
+  addUser,
+  getAllUsers
 }
