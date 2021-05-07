@@ -12,14 +12,14 @@ function Main() {
     console.log("setShowCreateCarpool: ture")
     setShowCreateCarpool(true);
   }
-  const onCancleCreateCarpool = () => {
+  const onCloseCreateCarpool = () => {
     setShowCreateCarpool(false);
   }
 
   return (
     <div id="main">
       <Button text="New Carpool" onClick={onNewCarpool} />
-      <CreateCarpool visible={showCreateCarpool} onCancleCreateCarpool={onCancleCreateCarpool} />
+      <CreateCarpool visible={showCreateCarpool} onCloseCreateCarpool={onCloseCreateCarpool} />
       <CarpoolCollection />
     </div>
   )

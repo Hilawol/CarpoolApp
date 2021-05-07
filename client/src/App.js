@@ -13,6 +13,8 @@ import LoginPage from '../src/pages/Login/LoginPage'
 import UserPage from '../src/pages/UserPage/UserPage';
 
 import MomentUtils from '@date-io/moment';
+import Carpool from './pages/UserPage/Carpools/Carpool/Carpool';
+import Sidebar from './pages/UserPage/SideBar/Sidebar';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
           <Route path='/user/:id' exact component={UserPage} />
           <Route path='/signup' exact component={SignUpPage} />
           <Route path='/login' exact component={LoginPage} />
+          <Route path='/carpool/:id' exact component={Carpool} />
+          <Route path='/carpool/:id' exact component={Sidebar} />
           {/* <Route exact path='/create-carpool' component={CreateCarpool} /> */}
         </BrowserRouter>
       </div>

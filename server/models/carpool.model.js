@@ -7,19 +7,30 @@ const carpoolSchema = new mongoose.Schema({
     required: true,
     minLength: 3
   },
-  owner: {
-    id: mongoose.SchemaTypes.ObjectId
-  },
+  // owner: {
+  //   id: mongoose.SchemaTypes.ObjectId
+  // },
   from: {
     type: String
   },
   to: {
     type: String
   },
+  trip: {
+    type: String,
+    enum: {
+      values: ['roundTrip', 'oneWay'],
+      message: '{VALUE} is not supported'
+    }
+  },
   date: {
     type: Date
   },
   passengers: {
+    type: [mongoose.SchemaTypes.ObjectId],
+    default: []
+  },
+  users: {
     type: [mongoose.SchemaTypes.ObjectId],
     default: []
   }
