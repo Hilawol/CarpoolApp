@@ -25,6 +25,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import './carpool.css';
 
 const useStyles = makeStyles({
   root: {
@@ -43,35 +44,38 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Carpool({ carpool }) {
+export default function Carpool({ carpool, onCarpoolClick }) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   console.log(carpool)
   return (
     carpool.carpool ?
-      <Card className={classes.root}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            {carpool.carpool.name}
-          </Typography>
-          <Typography variant="h5" component="h2">
-            {`From:${carpool.carpool.from}
+      <div className="carpool" onClick={() => onCarpoolClick(carpool._id)}>
+        <Card className={classes.root}>
+          <CardContent>
+            <Typography className={classes.title} color="textSecondary" gutterBottom>
+              {carpool.carpool.name}
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {`From:${carpool.carpool.from}
             To: ${carpool.carpool.to}`}
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              adjective
         </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
+            <Typography variant="body2" component="p">
+              well meaning and kindly.
           <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card> :
+              {'"a benevolent smile"'}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+      </div>
+      :
       null
   );
 }

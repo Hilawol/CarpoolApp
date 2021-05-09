@@ -1,0 +1,15 @@
+.CarpoolDashBoard{
+  width:100vw;
+  height: 100vh;
+  background-color: chartreuse;
+}
+
+.topPlaceHolder{
+  height: 64px;
+  background-color: chocolate;
+}
+
+.sidePlaceHolder{
+  width:73px;
+  background-color: cornflowerblue;
+}

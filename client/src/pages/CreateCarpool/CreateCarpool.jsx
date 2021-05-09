@@ -79,7 +79,6 @@ function CreateCarpool({ visible, onCloseCreateCarpool, userToken, onCreateCarpo
 
       const result = await Api.post('carpools', carpool, { headers: { 'Authorization': `Bearer ${userToken}` } });
       console.log("newCarpool:", result.data);
-      // history.push(`/user/${result.data.user._id}`);
       setIsVisible(false);
       onCreateCarpool(result.data);
     } catch (error) {

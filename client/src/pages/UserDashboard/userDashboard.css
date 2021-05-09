@@ -1,0 +1,16 @@
+.userDashboard{
+  width:100vw;
+  height: 100vh;
+}
+
+.topPlaceHolder{
+  height: 64px;
+}
+
+.sidePlaceHolder{
+  width:73px;
+}
+
+.mainContainer{
+  display: flex;
+}
