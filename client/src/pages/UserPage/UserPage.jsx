@@ -33,6 +33,8 @@ function UserPage() {
       const getUser = async () => {
         try {
           const result = await Api.get('/users/me', { headers: { 'Authorization': `Bearer ${parsedToken}` } });
+
+          console.log(result?.data);
           setUserData(result.data);
           setLoading(false);
         } catch (error) {
@@ -73,7 +75,7 @@ function UserPage() {
             <h1>Wellcome {userData.firstName}</h1>
             <section className="mainSection">
               <Sidebar />
-              <Main />
+              <Main userToken={userToken} userData={userData} />
             </section>
           </div>
   )

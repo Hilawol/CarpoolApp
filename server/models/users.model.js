@@ -27,6 +27,16 @@ const userSchema = new mongoose.Schema({
       }
     }
   },
+  carpools: [{
+    carpool: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Carpool',
+    },
+    owner: {
+      type: Boolean,
+    }
+  }],
+
   password: {
     type: String,
     required: true,
@@ -46,11 +56,17 @@ const userSchema = new mongoose.Schema({
   }]
 });
 
-userSchema.virtual('owenedCarpools', {
-  ref: 'Carpool',
-  localField: '_id',
-  foreignField: 'owner'
-})
+// userSchema.virtual('owenedCarpools', {
+//   ref: 'Carpool',
+//   localField: '_id',
+//   foreignField: 'owner'
+// })
+
+// userSchema.virtual('signedCarpools', {
+//   ref: 'Carpool',
+//   localField: '_id',
+//   foreignField: 'users'
+// })
 
 userSchema.methods.toJSON = function () {
   const user = this;

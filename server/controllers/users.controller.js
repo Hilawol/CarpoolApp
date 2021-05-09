@@ -12,7 +12,9 @@ const getAllUsers = async (req, res) => {
 }
 
 const getUserProfile = async (req, res) => {
-  res.send(req.user);
+  await req.user.populate('carpools.carpool').execPopulate();
+  console.log(req.user.carpools);
+  return res.send(req.user);
 }
 
 const getUser = async (req, res) => {

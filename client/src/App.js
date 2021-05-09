@@ -15,6 +15,7 @@ import UserPage from '../src/pages/UserPage/UserPage';
 import MomentUtils from '@date-io/moment';
 import Carpool from './pages/UserPage/Carpools/Carpool/Carpool';
 import Sidebar from './pages/UserPage/SideBar/Sidebar';
+import Test from './pages/UserPage/Test';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
         <BrowserRouter>
           {/* <Navbar /> */}
           <Route path='/' exact component={LandingPage, Navbar} />
-          <Route path='/myProfile' exact component={UserPage} />
+          <Route path='/myProfile' exact component={Test} />
           <Route path='/signup' exact component={SignUpPage} />
           <Route path='/login' exact component={LoginPage} />
           <Route path='/carpool/:id' exact component={Carpool} />

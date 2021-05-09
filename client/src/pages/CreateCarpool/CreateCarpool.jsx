@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CreateCarpool({ visible, onCloseCreateCarpool }) {
+function CreateCarpool({ visible, onCloseCreateCarpool, userToken, onCreateCarpool }) {
 
   const [errMsg, setErrMsg] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
@@ -77,16 +77,17 @@ function CreateCarpool({ visible, onCloseCreateCarpool }) {
       }
       console.log(carpool);
 
-      const result = await Api.post('carpools', carpool);
-      console.log(result.data);
+      const result = await Api.post('carpools', carpool, { headers: { 'Authorization': `Bearer ${userToken}` } });
+      console.log("newCarpool:", result.data);
       // history.push(`/user/${result.data.user._id}`);
       setIsVisible(false);
-      onCloseCreateCarpool();
+      onCreateCarpool(result.data);
     } catch (error) {
-      if (error.response.status === 400) {
-        setErrMsg(error.response.data.error);
-      }
-      else setErrMsg("Error occurred, please try again.")
+      console.log(error);
+      // if (error.response.status === 400) {
+      //   setErrMsg(error.response.data.error);
+      // }
+      // else setErrMsg("Error occurred, please try again.")
     }
   }
 

@@ -26,7 +26,9 @@ const addCarpool = async (req, res) => {
       ...req.body,
       owner: req.user._id
     })
-    carpool.save();
+    await carpool.save();
+    req.user.carpools.push({ carpool: carpool._id, owner: true });
+    await req.user.save();
     res.status(201).json(carpool);
   } catch (error) {
     console.log(error);
@@ -43,13 +45,19 @@ const addUser = async (req, res) => {
       carpool = await carpoolModel.findById(carpoolId);
       user = await usersModel.findById(userId);
     } catch (error) {
-      res.status(404).send();
+      return res.status(404).send();
     }
-    carpool.users.push(userId);
+
+    if (carpool.users.includes(userId)) {
+      return res.status(208).send();
+    }
+    carpool.users.push(user._id);
     carpool.save();
-    res.send(user);
+    user.carpools.push({ carpool: carpool._id, owner: false });
+    user.save();
+    return res.send(user);
   } catch (error) {
-    res.status(500).json({ "error": error });
+    return res.status(500).json({ "error": error });
   }
 }
 
