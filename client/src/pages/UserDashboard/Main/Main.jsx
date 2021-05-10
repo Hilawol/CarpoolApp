@@ -5,7 +5,7 @@ import Button from '../../../components/utils/Button/Button'
 import CreateCarpool from '../../CreateCarpool/CreateCarpool'
 import Api from '../../../Api/Api'
 
-function Main({ userToken, userData }) {
+function Main({ userToken, userData, onCarpoolClick }) {
 
   const [showCreateCarpool, setShowCreateCarpool] = useState(false);
   const [carpools, setCarpools] = useState(null);
@@ -31,7 +31,7 @@ function Main({ userToken, userData }) {
     <div id="main">
       <Button text="New Carpool" onClick={onNewCarpool} />
       <CreateCarpool userToken={userToken} visible={showCreateCarpool} onCreateCarpool={onCreateCarpool} onCloseCreateCarpool={onCloseCreateCarpool} />
-      <CarpoolCollection carpools={carpools} />
+      <CarpoolCollection carpools={carpools} onCarpoolClick={onCarpoolClick} />
     </div>
   )
 }

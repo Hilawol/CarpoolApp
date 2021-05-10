@@ -1,15 +1,19 @@
 .CarpoolDashBoard{
-  width:100vw;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  max-height: calc( 100vh - 64px);
+}
+
+.drivesContainer{
+  width:100%;
+  max-height: calc( 100vh - 64px);
+  display: flex;
+  flex-direction: column;
+}
+
+.passengersContainer{
+  background-color: thistle;
+  width:100%;
   height: 100vh;
-  background-color: chartreuse;
 }
 
-.topPlaceHolder{
-  height: 64px;
-  background-color: chocolate;
-}
-
-.sidePlaceHolder{
-  width:73px;
-  background-color: cornflowerblue;
-}

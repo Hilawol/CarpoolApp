@@ -1,3 +1,13 @@
 .makeStyles-content-10{
   padding: 0 !important;
 }
+
+.nav{
+  background-color:#FFFFFF;
+  color:#575B63;
+}
+
+.btn{
+  background-color:	rgba(166,211,211,0.6);
+  margin:1rem;
+}

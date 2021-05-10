@@ -26,6 +26,8 @@ import Api from '../../Api/Api';
 import LoginPage from '../Login/LoginPage';
 import Button from '../../components/utils/Button/Button'
 import CreateCarpool from '../CreateCarpool/CreateCarpool'
+import CarpoolDahsboard from '../CarpoolDashboard/CarpoolDahsboard';
+import UserProfile from '../UserProfile/UserProfile'
 
 const drawerWidth = 240;
 
@@ -87,7 +89,6 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
   },
 }));
 
@@ -99,7 +100,8 @@ export default function UserPage() {
   const [userToken, setUserToken] = useState(null);
   const [view, setView] = useState("carpools");
   const [showCreateCarpool, setShowCreateCarpool] = useState(false);
-  // const [carpools, setCarpools] = useState(null);
+  const [carpoolId, setCarpoolId] = useState(null);
+  // const [carpoo ls, setCarpoo l s] = useState(null);
 
   const history = useHistory();
 
@@ -167,6 +169,11 @@ export default function UserPage() {
     setShowCreateCarpool(false);
   }
 
+  const onCarpoolClick = (carpoolId) => {
+    setView('carpoolDashboard');
+    setCarpoolId(carpoolId);
+  }
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -179,19 +186,21 @@ export default function UserPage() {
     setOpen(false);
   };
 
+
   return (
     errMsg ? <div>{errMsg}</div> :
       loading ? <div>Loading...</div> :
         !userData ? <LoginPage /> :
           <div className={classes.root}>
             <CssBaseline />
+
             <AppBar
               position="fixed"
               className={clsx(classes.appBar, {
                 [classes.appBarShift]: open,
               })}
             >
-              <Toolbar>
+              <Toolbar className="nav">
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -229,11 +238,11 @@ export default function UserPage() {
               </div>
               <Divider />
               <List>
-                <ListItem button key={'Carpools'}>
+                <ListItem button key={'Carpools'} onClick={() => setView('carpools')} selected={view === 'carpools'}>
                   <ListItemIcon><DriveEtaSharpIcon /></ListItemIcon>
                   <ListItemText primary={'Carpools'} />
                 </ListItem>
-                <ListItem button key={'Profile'}>
+                <ListItem button key={'Profile'} onClick={() => setView('profile')} selected={view === 'profile'}>
                   <ListItemIcon><AccountBoxSharpIcon /></ListItemIcon>
                   <ListItemText primary={'Profile'} />
                 </ListItem>
@@ -249,8 +258,11 @@ export default function UserPage() {
             <main className={classes.content}>
               <div className={classes.toolbar} />
               {/* <CreateCarpool userToken={userToken} visible={showCreateCarpool} onCreateCarpool={onCreateCarpool} onCloseCreateCarpool={onCloseCreateCarpool} /> */}
-              <Main userToken={userToken} userData={userData} />
+              {view === 'carpools' ?
+                <Main userToken={userToken} userData={userData} onCarpoolClick={onCarpoolClick} /> :
+                view === 'profile' ? <UserProfile /> :
+                  <CarpoolDahsboard carpoolId={carpoolId} />}
             </main>
-          </div>
+          </div >
   );
 }

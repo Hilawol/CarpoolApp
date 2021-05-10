@@ -1,0 +1,82 @@
+.drive{
+  background-color: #fff;
+  border-radius: 1rem;
+  height: 100%;
+  margin:3rem 3rem 0 3rem;
+  padding: 1rem 1rem 0 1rem;
+  border:2px solid #EEEFEE;
+ }
+
+h3{
+  color:#575B63;
+  margin-left: 1rem;
+}
+
+.drive:hover{
+  box-shadow: var(--boxShadow);
+}
+
+.driveHeader{
+  display: flex;
+  border-bottom: 2px solid #EEEFEE;
+  justify-content:space-between;
+  align-items: center;
+  height: 3rem;
+  padding-bottom: 1rem;
+}
+
+.outColor{
+  color: rgb(226, 188, 174) !important;
+}
+
+.outBkg{
+  background-color: rgba(226, 188, 174,0.2) !important;;
+}
+.inColor{
+  color: rgb(126, 182, 163) !important;;
+}
+.inBkg{
+  background-color: rgba(126, 182, 163,0.2) !important;
+}
+
+.inArrow{
+  color: rgb(126, 182, 163);
+}
+
+.outArrow{
+  transform: rotate(180deg);
+}
+
+.destination{
+  display:flex;
+  align-items: center;
+}
+
+.action{
+  display: flex;
+}
+
+.addIcon{
+margin-right: 0.5rem;
+}
+
+.addCar{
+  /* background-color:#575B63 !important; */
+  display: flex;
+  align-items: center;
+  padding:0 1rem ;
+  border-radius: 20px;
+  border:none;
+  height: 3rem;
+}
+.addCarText{
+  font-size:1rem ;
+  color:#575B63;
+  font-weight: bold;
+}
+
+.carsSection{
+  margin-top: 1rem ;
+  height: 70%;
+  border-radius: 20px;
+}
