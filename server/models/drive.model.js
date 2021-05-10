@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const { default: UserDashBoard } = require('../../client/src/pages/UserDashboard/UserDashBoard');
 
 const driveSchema = new mongoose.Schema({
   carpool: {
-    type: mongoose.Schema.ObjectID,
-    ref: Carpool,
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Carpool',
   },
   type: {
     type: String,
@@ -23,7 +22,7 @@ const driveSchema = new mongoose.Schema({
   },
   cars: [{
     driver: {
-      type: mongoose.Schema.ObjectID,
+      type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
       required: true,
     },

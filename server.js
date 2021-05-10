@@ -5,16 +5,17 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
 const usersRoute = require('./server/routes/users.routes');
 const carpoolRoute = require('./server/routes/carpool.routes');
+const driveRoute = require('./server/routes/drive.routes');
 
 app.use('/api/users', usersRoute);
 app.use('/api/carpools', carpoolRoute);
+app.use('/api/drives', driveRoute);
 
 //connect to db with mongoose
 mongoose.connect("mongodb+srv://hila_admin:J2ughdciUs7PR9d@cluster0.dhhlk.mongodb.net/carpoolApp?retryWrites=true&w=majority", {

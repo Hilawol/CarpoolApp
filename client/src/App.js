@@ -29,8 +29,8 @@ function App() {
           <Route path='/myProfile' exact component={Test} />
           <Route path='/signup' exact component={SignUpPage} />
           <Route path='/login' exact component={LoginPage} />
-          <Route path='/carpool/:id' exact component={Carpool} />
-          <Route path='/carpool/:id' exact component={Sidebar} />
+          {/* <Route path='/carpool/:id' exact component={Carpool} />
+          <Route path='/carpool/:id' exact component={Sidebar} /> */}
           {/* <Route exact path='/create-carpool' component={CreateCarpool} /> */}
         </BrowserRouter>
       </div>

@@ -1,6 +1,5 @@
 const userModel = require('../models/users.model');
 const bcrypt = require('bcryptjs');
-const User = require('../models/users.model');
 
 const getAllUsers = async (req, res) => {
   try {
@@ -55,7 +54,8 @@ const signupUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const user = await User.findByCredentials(req.body.email, req.body.password);
+    console.log("in loginUser");
+    const user = await userModel.findByCredentials(req.body.email, req.body.password);
     const token = await user.generateAuthToken();
     res.status(200).json({ user, token });
   } catch (error) {

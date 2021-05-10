@@ -47,6 +47,7 @@ function LoginPage() {
       email,
       password
     }
+    console.log("will login:", user)
     try {
       const { data } = await Api.post('users/login', user);
       console.log(data)

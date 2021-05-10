@@ -56,18 +56,6 @@ const userSchema = new mongoose.Schema({
   }]
 });
 
-// userSchema.virtual('owenedCarpools', {
-//   ref: 'Carpool',
-//   localField: '_id',
-//   foreignField: 'owner'
-// })
-
-// userSchema.virtual('signedCarpools', {
-//   ref: 'Carpool',
-//   localField: '_id',
-//   foreignField: 'users'
-// })
-
 userSchema.methods.toJSON = function () {
   const user = this;
   const userObject = user.toObject();
@@ -88,11 +76,14 @@ userSchema.methods.generateAuthToken = async function () {//instance method
 // //statics available to the model
 userSchema.statics.findByCredentials = async (email, password) => {//model methods
   try {
+    console.log("will search user");
     const user = await User.findOne({ email: email });
+    console.log("found user:", user);
     if (!user) {
       throw new Error('Unable to login');
     }
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("password match", isMatch);
     if (!isMatch) {
       throw new Error('Unable to login');
     }
