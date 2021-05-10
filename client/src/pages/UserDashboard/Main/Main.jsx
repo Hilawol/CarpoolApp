@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './main.css'
-import CarpoolCollection from '../Carpools/CarpoolList/CarpoolCollection'
+import CarpoolCollection from '../../CarpoolCollection/CarpoolCollection'
 import Button from '../../../components/utils/Button/Button'
 import CreateCarpool from '../../CreateCarpool/CreateCarpool'
 import Api from '../../../Api/Api'
@@ -13,7 +13,7 @@ function Main({ userToken, userData }) {
   useEffect(() => {
     setCarpools(userData.carpools);
     console.log(userData.carpools);
-  }, [])
+  }, [userData])
 
   const onNewCarpool = () => {
     console.log("setShowCreateCarpool: ture")

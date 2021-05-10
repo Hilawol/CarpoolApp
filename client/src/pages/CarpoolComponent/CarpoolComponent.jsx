@@ -20,12 +20,14 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import moment from 'moment'
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import './carpool.css';
+import DriveEtaSharpIcon from '@material-ui/icons/DriveEtaSharp';
+import './carpoolComponent.css';
 
 const useStyles = makeStyles({
   root: {
@@ -54,25 +56,23 @@ export default function Carpool({ carpool, onCarpoolClick }) {
       <div className="carpool" onClick={() => onCarpoolClick(carpool._id)}>
         <Card className={classes.root}>
           <CardContent>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
+            <Typography variant="h6" component="h2">
+              <DriveEtaSharpIcon />
               {carpool.carpool.name}
             </Typography>
-            <Typography variant="h5" component="h2">
-              {`From:${carpool.carpool.from}
+            <Typography className={classes.title} >
+              {`From: ${carpool.carpool.from}
             To: ${carpool.carpool.to}`}
             </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-              adjective
-        </Typography>
-            <Typography variant="body2" component="p">
-              well meaning and kindly.
-          <br />
-              {'"a benevolent smile"'}
+            <Typography className={classes.pos} >
+              {moment(carpool.carpool.date).format("DD.MM.YYYY HH:mm")}
+              {/* {carpool.carpool.date} */}
+            </Typography>
+            <Typography variant="body2" component="p" color="textSecondary">
+              {carpool.carpool.owner ? "Carpool owner" : ''}
+              <br />
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
         </Card>
       </div>
       :

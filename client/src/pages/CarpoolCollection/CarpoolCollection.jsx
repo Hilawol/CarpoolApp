@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Carpool from '../Carpool/Carpool'
+import CarpoolComponent from '../CarpoolComponent/CarpoolComponent'
 import './carpoolCollection.css'
 
 function CarpoolCollection({ title, carpools, onCarpoolClick }) {
@@ -10,7 +10,7 @@ function CarpoolCollection({ title, carpools, onCarpoolClick }) {
     <div className="carpoolCollection">
       <h1>{title}</h1>
       {carpools?.length > 0 ?
-        carpools.map((carpool, index) => <Carpool key={index} carpool={carpool} onCarpoolClick={onCarpoolClick} />) :
+        carpools.map((carpool, index) => <CarpoolComponent key={index} carpool={carpool} onCarpoolClick={onCarpoolClick} />) :
         <h3>No carpools yet</h3>
       }
     </div>
