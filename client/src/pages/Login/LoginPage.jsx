@@ -70,7 +70,7 @@ function LoginPage() {
   }
 
   const onSignUpClick = async () => {
-    console.log("sogn up");
+    history.push(`/signup`);
   }
   return (
     <div className="loginPage">
