@@ -10,7 +10,7 @@ import SignUpPage from '../src/pages/SignUp/SignUpPage'
 import LoginPage from '../src/pages/Login/LoginPage'
 
 import MomentUtils from '@date-io/moment';
-import UserDashboard from './pages/UserDashboard/UserDashboard'
+import UserDashboard from './pages/UserDashboard/UserDashboard';
 
 
 function App() {

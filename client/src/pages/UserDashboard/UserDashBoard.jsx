@@ -27,7 +27,7 @@ import LoginPage from '../Login/LoginPage';
 // import Button from '../../components/utils/Button/Button'
 // import CreateCarpool from '../CreateCarpool/CreateCarpool'
 import CarpoolDahsboard from '../CarpoolDashboard/CarpoolDahsboard';
-import UserProfile from '../UserProfile/UserProfile'
+import UserProfile from '../UserProfile/UserProfile';
 
 const drawerWidth = 240;
 
@@ -99,7 +99,7 @@ export default function UserPage() {
   const [errMsg, setErrMsg] = useState(null);
   const [userToken, setUserToken] = useState(null);
   const [view, setView] = useState("carpools");
-  const [showCreateCarpool, setShowCreateCarpool] = useState(false);
+  // const [showCreateCarpool, setShowCreateCarpool] = useState(false);
   const [carpoolId, setCarpoolId] = useState(null);
   // const [carpoo ls, setCarpoo l s] = useState(null);
 
@@ -122,7 +122,6 @@ export default function UserPage() {
       const getUser = async () => {
         try {
           const result = await Api.get('/users/me', { headers: { 'Authorization': `Bearer ${parsedToken}` } });
-
           console.log("userData:", result?.data);
           setUserData(result.data);
           // setCarpools(result.data.carpools);
@@ -154,20 +153,20 @@ export default function UserPage() {
     }
   }
 
-  const onNewCarpool = () => {
-    console.log("setShowCreateCarpool: ture")
-    setShowCreateCarpool(true);
-  }
-  const onCreateCarpool = (carpool) => {
-    // setCarpools([...carpools, carpool]);
-    const user = { ...userData };
-    userData.carpools.push(carpool);
-    setUserData(user);
-    onCloseCreateCarpool();
-  }
-  const onCloseCreateCarpool = () => {
-    setShowCreateCarpool(false);
-  }
+  // const onNewCarpool = () => {
+  //   console.log("setShowCreateCarpool: ture")
+  //   setShowCreateCarpool(true);
+  // }
+  // const onCreateCarpool = (carpool) => {
+  //   // setCarpools([...carpools, carpool]);
+  //   const user = { ...userData };
+  //   userData.carpools.push(carpool);
+  //   setUserData(user);
+  //   onCloseCreateCarpool();
+  // }
+  // const onCloseCreateCarpool = () => {
+  //   setShowCreateCarpool(false);
+  // }
 
   const onCarpoolClick = (carpoolId) => {
     setView('carpoolDashboard');
@@ -215,7 +214,7 @@ export default function UserPage() {
                 <Typography className="welcomeMsg" variant="h6" noWrap>
                   Wellcome {userData.firstName}
                 </Typography>
-                {/* <Button text="New Carpool" onClick={onNewCarpool} /> */}
+
               </Toolbar>
             </AppBar>
             <Drawer
@@ -257,12 +256,12 @@ export default function UserPage() {
             </Drawer>
             <main className={classes.content}>
               <div className={classes.toolbar} />
-              {/* <CreateCarpool userToken={userToken} visible={showCreateCarpool} onCreateCarpool={onCreateCarpool} onCloseCreateCarpool={onCloseCreateCarpool} /> */}
               {view === 'carpools' ?
                 <Main userToken={userToken} userData={userData} onCarpoolClick={onCarpoolClick} /> :
                 view === 'profile' ? <UserProfile /> :
                   <CarpoolDahsboard carpoolId={carpoolId} />}
             </main>
-          </div >
+          </div>
+
   );
 }
