@@ -23,7 +23,7 @@ function App() {
             <Navbar />
             <LandingPage />
           </Route>
-          {/* <Route path='/myProfile' exact component={UserDashboard} /> */}
+          <Route path='/myProfile' exact component={UserDashboard} />
           <Route path='/signup' exact component={SignUpPage} />
           <Route path='/login' exact component={LoginPage} />
         </BrowserRouter>
