@@ -3,7 +3,7 @@ import './main.css'
 import CarpoolCollection from '../../CarpoolCollection/CarpoolCollection'
 import Button from '../../../components/utils/Button/Button'
 import CreateCarpool from '../../CreateCarpool/CreateCarpool'
-import Api from '../../../Api/Api'
+// import Api from '../../../Api/Api'
 
 function Main({ userToken, userData, onCarpoolClick }) {
 

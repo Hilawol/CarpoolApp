@@ -1,30 +1,10 @@
-// import React from 'react'
-// import './carpool.css';
-
-// function Carpool({ carpool }) {
-
-//   return (
-//     carpool ?
-//       <div className="carpool">
-//         <p className="title"></p>
-//         Carpool Name: {carpool.carpool.name} {carpool.owner ? " (You created this carpool)" : ''}
-//       From:{carpool.carpool.from}
-//       To: {carpool.carpool.to}
-//       Date: {carpool.carpool.date}
-//       </div> :
-//       null
-//   )
-// }
-
-// export default Carpool
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DriveEtaSharpIcon from '@material-ui/icons/DriveEtaSharp';
 import './carpoolComponent.css';
@@ -48,7 +28,7 @@ const useStyles = makeStyles({
 
 export default function Carpool({ carpool, onCarpoolClick }) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  // const bull = <span className={classes.bullet}>•</span>;
 
   console.log(carpool)
   return (

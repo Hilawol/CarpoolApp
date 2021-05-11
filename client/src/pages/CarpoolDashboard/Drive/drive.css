@@ -58,16 +58,22 @@ h3{
 
 .addIcon{
 margin-right: 0.5rem;
+color:#575B63;
 }
 
 .addCar{
-  /* background-color:#575B63 !important; */
   display: flex;
   align-items: center;
   padding:0 1rem ;
   border-radius: 20px;
   border:none;
   height: 3rem;
+  border: 2px solid transparent; 
+}
+
+.addCar:hover{
+  cursor: pointer;
+  border: 2px solid #575B63; 
 }
 .addCarText{
   font-size:1rem ;
