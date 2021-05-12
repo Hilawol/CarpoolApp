@@ -1,33 +1,32 @@
-.btn{
+.btn {
   /* width:6rem; */
   width: fit-content;
   padding: 0 0.8rem;
   height: 2.3rem;
-  border:none;
+  border: none;
   font-size: 1rem;
   margin: 1rem 0;
   border-radius: 0.3rem;
   cursor: pointer;
 }
 
-.btn:hover{
+.btn:hover {
   font-weight: bold;
 }
 
-.solid{
+.solid {
   background-color: var(--dark-bkg);
-  color:white;
+  color: white;
 }
 
-.outline{
+.outline {
   border: 2px solid var(--dark-bkg);
   background-color: transparent;
   font-weight: normal;
 }
 
-.text{
-  color:var(--dark-bkg);
+.text {
+  color: var(--dark-bkg);
   background-color: transparent;
-  border: none;
+  border-color: transparent;
 }
-

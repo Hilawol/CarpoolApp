@@ -1,0 +1,15 @@
+.addCarCard {
+  height: 50vh;
+  width: 30vh;
+  border: 2px solid #eeefee;
+  background-color: white;
+}
+
+.closeBtn:hover {
+  cursor: pointer;
+}
+
+.addCardModal .actionDiv {
+  flex-direction: row;
+  justify-content: space-between;
+}

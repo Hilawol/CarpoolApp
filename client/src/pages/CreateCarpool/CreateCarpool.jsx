@@ -83,10 +83,10 @@ function CreateCarpool({ visible, onCloseCreateCarpool, userToken, onCreateCarpo
       onCreateCarpool("carpool created:", result.data);
     } catch (error) {
       console.log(error);
-      // if (error.response.status === 400) {
-      //   setErrMsg(error.response.data.error);
-      // }
-      // else setErrMsg("Error occurred, please try again.")
+      if (error.response.status === 400) {
+        setErrMsg(error.response.data.error);
+      }
+      else setErrMsg("Error occurred, please try again.")
     }
   }
 

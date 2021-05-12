@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserPage() {
+export default function UserDashboard() {
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -259,7 +259,7 @@ export default function UserPage() {
               {view === 'carpools' ?
                 <Main userToken={userToken} userData={userData} onCarpoolClick={onCarpoolClick} /> :
                 view === 'profile' ? <UserProfile /> :
-                  <CarpoolDahsboard carpoolId={carpoolId} />}
+                  <CarpoolDahsboard carpoolId={carpoolId} user={userData} />}
             </main>
           </div>
 

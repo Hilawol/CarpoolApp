@@ -4,16 +4,13 @@ const driveSchema = new mongoose.Schema({
   carpool: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Carpool',
+    required:true,
   },
   type: {
     type: String,
-    values: ['inbound', 'outbound'],
-    message: '{VALUE} is not supported'
-  },
-  from: {
-    type: String,
-    trim: true,
-    minLength: 2,
+    enum: ['inbound', 'outbound'],
+    message: '{VALUE} is not supported',
+    required:true,
   },
   to: {
     type: String,
@@ -29,11 +26,13 @@ const driveSchema = new mongoose.Schema({
     capacity: {
       type: Number,
       min: 1,
-      max: 8,
+      max: 10,
       required: true,
     },
-    passengers: [],
-    default: [],
+    passengers:{
+      type:Array,
+      default: [],
+    },
   }],
   passenger: {
     type: Array,
