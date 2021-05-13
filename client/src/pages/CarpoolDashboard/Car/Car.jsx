@@ -1,11 +1,13 @@
 import React from "react";
 import "./car.css";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 function Car({ car }) {
   return (
-    <div>
+    <div className="car">
       {car.driver}
       {car.capacity}
+      <PersonAddIcon onClick={() => console.log("Add passenger")} />
     </div>
   );
 }

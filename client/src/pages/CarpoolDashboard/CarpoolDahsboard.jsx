@@ -25,27 +25,36 @@ function CarpoolDahsboard({ carpoolId, user, userToken }) {
 
   return (
     <div className="CarpoolDashBoard">
+      {/* <h2>Ballet Class</h2> */}
       <div className="drivesContainer">
-        <h2>Ballet Class</h2>
-        {drives.map((drive) => (
-          <Drive
-            // key={drive_id}
-            type={drive.type}
-            from={drive.from}
-            to={drive.to}
-            date={moment(drive.date).format("DD.MM.YYYY HH:mm")}
-            driverName={`${user.firstName} ${user.lastName}`}
-          />
-        ))}
-        {/* <Drive
-          type="inbound"
-          from="Home"
-          to="Studio"
-          date="16/03/2022 17:30"
-          }
-        /> */}
+        {drives
+          .filter((d) => d.type === "outbound")
+          .map((drive) => (
+            <Drive
+              // key={drive_id}
+              type={drive.type}
+              from={drive.from}
+              to={drive.to}
+              date={moment(drive.date).format("DD.MM.YYYY HH:mm")}
+              driverName={`${user.firstName} ${user.lastName}`}
+            />
+          ))}
       </div>
-      <div className="passengersContainer"></div>
+      <div className="drivesContainer">
+        {drives
+          .filter((d) => d.type === "inbound")
+          .map((drive) => (
+            <Drive
+              // key={drive_id}
+              type={drive.type}
+              from={drive.from}
+              to={drive.to}
+              date={moment(drive.date).format("DD.MM.YYYY HH:mm")}
+              driverName={`${user.firstName} ${user.lastName}`}
+            />
+          ))}
+      </div>
+      {/* <div className="passengersContainer"></div> */}
     </div>
   );
 }

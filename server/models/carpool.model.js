@@ -39,11 +39,6 @@ const carpoolSchema = new mongoose.Schema({
     }],
     default: []
   },
-  // drives:{
-  //   type:[{
-  //     type: mongoose.SchemaTypes.ObjectId,
-  //   ref:'Drive',
-  // }],
   drives:[{
     type: mongoose.SchemaTypes.ObjectId,
     ref:'Drive'

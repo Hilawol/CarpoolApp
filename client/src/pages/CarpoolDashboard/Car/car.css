@@ -1,0 +1,9 @@
+.car {
+  width: 200px;
+  height: 100px;
+  border: 2px solid #eeefee;
+  border-radius: 1rem;
+  background-color: white;
+  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem;
+}
