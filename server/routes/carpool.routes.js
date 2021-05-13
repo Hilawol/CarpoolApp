@@ -11,6 +11,10 @@ router.get('/', auth, (req, res) => {
   carpoolController.getAllUsers(req, res);
 }).get('/:id', auth, (req, res) => {
   carpoolController.getCarpoolByid(req, res);
+}).get('/:id/drives',auth,(req,res)=>{
+  carpoolController.getDrives(req,res);
+}).post('/:id/drives',auth,(req,res)=>{
+  carpoolController.addDrive(req,res);
 }).post('/', auth, (req, res) => {
   carpoolController.addCarpool(req, res);
 })

@@ -21,7 +21,7 @@ const carpoolSchema = new mongoose.Schema({
   trip: {
     type: String,
     enum: {
-      values: ['roundTrip', 'oneWay'],
+      values: ['roundtrip', 'oneway'],
       message: '{VALUE} is not supported'
     }
   },
@@ -38,42 +38,16 @@ const carpoolSchema = new mongoose.Schema({
       ref: 'User'
     }],
     default: []
-  }
-
-  // drives: [{
-  //   from: {
-  //     type: String,
-  //     required: true,
-  //     minLength: 3
-  //   },
-  //   to: {
-  //     type: String,
-  //     required: true,
-  //     minLength: 3
-  //   },
-  //   date: {
-  //     type: Date,
-  //     required: true//TODO:validtae date to be in the future
-  //   },
-  //   dt: { //dt - departure time
-  //     type: Date,
-  //     required: true
-  //   },
-  //   cars: [{
-  //     driver: {
-  //       name: {
-  //         type: String,
-  //         required: true,
-  //         minLength: 3
-  //       }
-  //     },
-  //     capacity: {
-  //       type: Number,
-  //       min: 1
-  //     },
-  //     passengers: []
-  //   }]
-  // }]
+  },
+  // drives:{
+  //   type:[{
+  //     type: mongoose.SchemaTypes.ObjectId,
+  //   ref:'Drive',
+  // }],
+  drives:[{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref:'Drive'
+  }]
 })
 
 const Carpool = mongoose.model('Carpool', carpoolSchema);

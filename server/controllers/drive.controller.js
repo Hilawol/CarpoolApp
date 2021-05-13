@@ -1,8 +1,6 @@
 const driveModel = require('../models/drive.model');
-const userModel = require('../models/users.model');
 
-
-const addDrive = async (req, res) => {
+const createDrive = async (req, res) => {
   try {
     console.log("addDrive")
     const drive = new driveModel({
@@ -32,11 +30,10 @@ const addCar = async(req,res)=>{
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
-  
   }
 }
 
 module.exports = {
-  addDrive,
+  createDrive,
   addCar
 }

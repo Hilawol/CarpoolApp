@@ -10,7 +10,7 @@ function AddCar({ driverName, visible, onClose, onAdd }) {
   const [capacity, setCapacity] = useState();
   const [driver, setDriver] = useState();
   const [errMsg, setErrMsg] = useState(null);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(visible);
@@ -24,11 +24,7 @@ function AddCar({ driverName, visible, onClose, onAdd }) {
   const onAddClick = () => {
     if (!isNaN(capacity) && !isNaN(parseInt(capacity))) {
       if (capacity > 0 && capacity <= 10) {
-        const car = {
-          capacity,
-          driver: driverName,
-        };
-        return onAdd(car);
+        return onAdd({ driver: driverName, capacity });
       }
     }
     return setErrMsg("Invalid value. Capacity must be between 1-10");

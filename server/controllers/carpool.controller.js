@@ -1,5 +1,7 @@
+const { Mongoose } = require('mongoose');
 const carpoolModel = require('../models/carpool.model');
 const usersModel = require('../models/users.model');
+const driveModel = require('../models/drive.model');
 
 
 const getAll = async (req, res) => {
@@ -26,7 +28,31 @@ const addCarpool = async (req, res) => {
       ...req.body,
       owner: req.user._id
     })
+ 
+    let outbound = new driveModel({
+      carpool: carpool._id,
+      type: "outbound",
+      to: carpool.to,
+      date: carpool.date,
+    });
+
+    let inbound;
+    if (carpool.trip === "roundtrip") {
+      inbound = new driveModel({
+        carpool: carpool._id,
+        type: "inbound",
+        to: carpool.from,
+        date: carpool.date,
+      });
+    }
+    carpool.drives.push(outbound._id);
+    if( inbound){
+      carpool.drives.push(inbound._id);
+      await inbound.save();
+    }
     await carpool.save();
+    await outbound.save();
+
     req.user.carpools.push({ carpool: carpool._id, owner: true });
     await req.user.save();
     res.status(201).json(carpool);
@@ -76,10 +102,50 @@ const getAllUsers = async (req, res) => {
   }
 }
 
+const addDrive = async (req, res) => {
+  try {
+    console.log("params:",req.params,"body:",req.body);
+    const carpoolId = req.params.id;
+    const carpoolType = req.body.type;
+    
+    const carpool = await carpoolModel.findById(carpoolId);
+    const drive = new driveModel({
+      carpool:carpoolId,
+      type:carpoolType,
+      to:(carpool.trip==='outbound'? carpool.to: carpool.from),
+      date:carpool.date,
+    })
+    await drive.save();
+    return res.send(drive);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
+}
+
+const getDrives= async(req,res)=>{
+try {
+  const carpoolId = req.params.id;
+  try {
+    console.log(carpoolId)
+    const carpool = await carpoolModel.findOne({_id:carpoolId}).populate('drives');
+  return res.send(carpool.drives);
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send();
+  }
+  
+} catch (error) {
+  console.log(error);
+    return res.status(500).send();
+}
+}
 module.exports = {
   getAll,
   getCarpoolById,
   addCarpool,
   addUser,
-  getAllUsers
+  getAllUsers,
+  addDrive,
+  getDrives
 }

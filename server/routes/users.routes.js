@@ -5,6 +5,8 @@ const auth = require('../middlewares/auth');
 
 router.get('/me', auth, (req, res) => {
   usersController.getUserProfile(req, res);
+}).get('/me/carpools',auth,(req,res)=>{
+  usersController.getMyCarpools(req,res);
 }).delete('/me', auth, (req, res) => {
   usersController.deleteUserProfile(req, res);
 }).post('/signup', (req, res) => { //Create new user

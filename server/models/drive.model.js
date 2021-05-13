@@ -17,6 +17,15 @@ const driveSchema = new mongoose.Schema({
     trim: true,
     minLength: 2,
   },
+  date:{
+    type:Date,
+    required:true,
+    validate(value){
+      if(!value>new Date()){
+        throw new Error('Invalid date');
+      }
+    }
+  },
   cars: [{
     driver: {
       type: mongoose.SchemaTypes.ObjectId,

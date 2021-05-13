@@ -11,11 +11,21 @@ const getAllUsers = async (req, res) => {
 }
 
 const getUserProfile = async (req, res) => {
-  await req.user.populate('carpools.carpool').execPopulate();
-  console.log(req.user.carpools);
+  // await req.user.populate('carpools.carpool').execPopulate();
+  // console.log(req.user.carpools);
   return res.send(req.user);
 }
 
+const getMyCarpools = async(req,res)=>{
+  try {
+    await req.user.populate('carpools.carpool').execPopulate();
+    console.log(req.user.carpools);
+    return res.send(req.user.carpools);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send();
+  }
+}
 const getUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -43,7 +53,7 @@ const signupUser = async (req, res) => {
       email,
       password
     });
-    const result = await user.save();
+     await user.save();
     const token = await user.generateAuthToken();
     return res.status(201).json({ user, token });
   } catch (error) {
@@ -83,6 +93,7 @@ const deleteUserProfile = async (req, res) => {
 }
 
 module.exports = {
+  getMyCarpools,
   getUserProfile,
   signupUser,
   loginUser,
