@@ -8,10 +8,9 @@ import Navbar from '../src/components/utils/Navbar/Navbar';
 import LandingPage from '../src/pages/Landing/LandingPage';
 import SignUpPage from '../src/pages/SignUp/SignUpPage';
 import LoginPage from '../src/pages/Login/LoginPage';
+import UserDashboard from '../src/pages/UserDashboard/UserDashboard';
 
 import MomentUtils from '@date-io/moment';
-import UserDashboard from './pages/UserDashboard/UserDashboard';
-
 
 
 
