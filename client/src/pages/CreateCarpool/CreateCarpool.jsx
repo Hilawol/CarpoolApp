@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
-// import validator from 'validator';
 
 import { makeStyles, TextField } from "@material-ui/core";
 import { DatePicker, TimePicker } from "@material-ui/pickers";
-
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-// import FormLabel from '@material-ui/core/FormLabel';
-
-// import { Link, useHistory } from 'react-router-dom';
 
 import Api from "../../Api/Api";
 import Button from "../../components/utils/Button/Button";
-// import Input from '../../components/utils/InputText/Input';
 import Modal from "../../components/utils/Modal/Modal";
 import IconBtn from "../../components/utils/Button/IconBtn";
 import "./createCarpool.css";
@@ -41,7 +35,7 @@ function CreateCarpool({
   const [name, setName] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [tripRadio, handleRadioChange] = useState("roundtrip");
+  const [tripType, setTripType] = useState("roundtrip");
 
   const classes = useStyles(); //For material Ui
 
@@ -76,7 +70,7 @@ function CreateCarpool({
         name,
         from,
         to,
-        trip: tripRadio,
+        trip: tripType,
         date: selectedDate,
       };
       console.log("carpool:", carpool);
@@ -88,10 +82,14 @@ function CreateCarpool({
       onCreateCarpool(result.data);
     } catch (error) {
       console.log(error);
-      if (error.response.status === 400) {
-        setErrMsg(error.response.data.error);
-      } else setErrMsg("Error occurred, please try again.");
+      // if (error.response.status === 400) {
+      //   setErrMsg(error.response.data.error);
+      // } else setErrMsg("Error occurred, please try again.");
     }
+  };
+
+  const handleRadioChange = (event) => {
+    setTripType(event.target.value);
   };
 
   const content = (
@@ -132,10 +130,8 @@ function CreateCarpool({
         <FormControl component="fieldset">
           <RadioGroup
             row
-            aria-label="position"
-            name="position"
+            name="tripType"
             defaultValue="roundtrip"
-            value={tripRadio}
             onChange={handleRadioChange}
           >
             <FormControlLabel
