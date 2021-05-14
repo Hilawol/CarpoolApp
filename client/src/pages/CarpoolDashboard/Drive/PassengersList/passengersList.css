@@ -1,0 +1,49 @@
+.acordion {
+  margin: 1rem 0;
+  width: 100%;
+}
+.accordionSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.03);
+  min-height: 56px;
+}
+
+.accordionContent {
+  min-height: 64px;
+}
+
+.addPassBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50px;
+  background-color: white;
+}
+
+.addPassBtn:hover {
+  border-color: inherit;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* .addPassBtn:hover.fa-user-plus {
+  color: white;
+} */
+
+.expandBtn {
+  cursor: pointer;
+}
+
+.expanded {
+  display: block;
+}
+
+.collapsed {
+  display: none;
+}

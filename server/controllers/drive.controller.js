@@ -40,7 +40,8 @@ const addCar = async(req,res)=>{
     })
 
     await car.save();
-    await drive.populate('cars').execPopulate();
+
+    await drive.populate({path:'cars', populate:{path:'driver'}}).execPopulate();
     return res.send(drive.cars);
   } catch (error) {
     console.log(error);
@@ -58,16 +59,14 @@ const getCars = async(req,res)=>{
       populate:{
         path:'driver'
       }});
+         return res.send(drive.cars);
     } catch (error) {
       console.log(error);
       return res.status(404).send();
     }
-    console.log("1",drive);
-    await drive.populate('driver').execPopulate();
-    // console.log("2",drive)
+    
     // await drive.populate('driver').execPopulate();
-    // console.log("3",drive)
-    res.send(drive.cars);
+    // res.send(drive.cars);
 
   } catch (error) {
     console.log(error);

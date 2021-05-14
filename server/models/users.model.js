@@ -36,7 +36,6 @@ const userSchema = new mongoose.Schema({
       type: Boolean,
     }
   }],
-
   password: {
     type: String,
     required: true,
@@ -52,6 +51,15 @@ const userSchema = new mongoose.Schema({
     token: {
       type: String,
       required: true,
+    }
+  }],
+  passengers:[{
+    name:{
+      type:String,
+      trim:true,
+      minLength:2,
+      required:true,
+      unique:true
     }
   }]
 });

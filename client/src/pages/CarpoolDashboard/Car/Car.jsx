@@ -7,7 +7,7 @@ function Car({ car }) {
     <div className="car">
       {car.driver.firstName}
       {car.capacity}
-      <PersonAddIcon onClick={() => console.log("Add passenger")} />
+      {/* <PersonAddIcon onClick={() => console.log("Add passenger")} /> */}
     </div>
   );
 }

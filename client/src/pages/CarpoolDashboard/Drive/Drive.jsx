@@ -5,6 +5,8 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import AddCar from "../../AddCar/AddCar";
 import Api from "../../../Api/Api";
 import Car from "../Car/Car";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import PassengersList from "./PassengersList/PassengersList";
 
 function Drive({ id, type, from, to, date, user, userToken }) {
   const [openAddCar, setOpenAddCar] = useState(false);
@@ -67,13 +69,25 @@ function Drive({ id, type, from, to, date, user, userToken }) {
             }
           >
             <AddCircleOutlineOutlinedIcon
-              fontSize="large"
+              fontSize="medium"
               sx={{ mr: 1 }}
               className="addIcon"
             />
             <span className="addCarText">Add Car</span>
           </button>
         </div>
+      </div>
+      <div className="passengersSection">
+        <PassengersList />
+        {/* <button className="addPassBtn">
+          <AddCircleOutlineOutlinedIcon
+            fontSize="medium"
+            sx={{ mr: 1 }}
+            className="addIcon"
+          />
+          <PersonAddIcon className="addIcon" />
+          <span className="addCarText">Add Passenger</span>
+        </button> */}
       </div>
       <div
         className={
