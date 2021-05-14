@@ -6,13 +6,28 @@ import AddCar from "../../AddCar/AddCar";
 import Api from "../../../Api/Api";
 import Car from "../Car/Car";
 
-function Drive({ type, from, to, date, driverName }) {
+function Drive({ id, type, from, to, date, user, userToken }) {
   const [openAddCar, setOpenAddCar] = useState(false);
   const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errMsg, setErrMsg] = useState(null);
 
   useEffect(() => {
-    console.log("cars:", cars);
-  }, [cars]);
+    const getCars = async () => {
+      try {
+        setLoading(true);
+        const result = await Api.get(`/drives/${id}/cars`, {
+          headers: { Authorization: `Bearer ${userToken}` },
+        });
+        setCars(result.data);
+        setLoading(false);
+      } catch (error) {
+        setErrMsg("An error ocurred. Please try again.");
+        setLoading(false);
+      }
+    };
+    getCars();
+  }, []);
 
   const onAddCarClick = () => {
     setOpenAddCar(true);
@@ -22,10 +37,9 @@ function Drive({ type, from, to, date, driverName }) {
     setOpenAddCar(false);
   };
 
-  const onCreateCar = async (car) => {
-    console.log("create car:", car);
-    // const driveData = await Api.putch(`/drives/${}/cars`)
-    setCars([...cars, car]);
+  const onCreateCar = async (cars) => {
+    console.log("create car:", cars);
+    setCars(cars);
     onCloseAddCar();
   };
 
@@ -34,13 +48,13 @@ function Drive({ type, from, to, date, driverName }) {
       <div className="driveHeader">
         <div className="destination">
           <DoubleArrowIcon
-            className={type === "outbound" ? "outColor outArrow" : "inColor"}
+            className={type === "outbound" ? "outColor" : "inColor inArrow"}
           />
           <DoubleArrowIcon
-            className={type === "outbound" ? "outColor outArrow" : "inColor"}
+            className={type === "outbound" ? "outColor" : "inColor inArrow"}
           />
           <DoubleArrowIcon
-            className={type === "outbound" ? "outColor outArrow" : "inColor"}
+            className={type === "outbound" ? "outColor" : "inColor inArrow"}
           />
           <h3>{`Driving to ${to}`}</h3>
         </div>
@@ -70,12 +84,19 @@ function Drive({ type, from, to, date, driverName }) {
           visible={openAddCar}
           onClose={onCloseAddCar}
           onAdd={onCreateCar}
-          driverName={driverName}
+          driver={user}
+          driveId={id}
+          userToken={userToken}
         />
-
-        {cars.map((car, index) => (
-          <Car car={car} key={index} />
-        ))}
+        {errMsg ? (
+          <div>{errMsg}</div>
+        ) : loading ? (
+          <div>Loading...</div>
+        ) : !cars.length > 0 ? (
+          <div>No Cars</div>
+        ) : (
+          cars.map((car, index) => <Car car={car} key={index} />)
+        )}
       </div>
     </div>
   );

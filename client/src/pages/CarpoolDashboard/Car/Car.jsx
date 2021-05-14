@@ -5,7 +5,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 function Car({ car }) {
   return (
     <div className="car">
-      {car.driver}
+      {car.driver.firstName}
       {car.capacity}
       <PersonAddIcon onClick={() => console.log("Add passenger")} />
     </div>

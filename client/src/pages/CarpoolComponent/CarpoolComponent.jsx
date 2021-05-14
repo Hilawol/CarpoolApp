@@ -38,10 +38,12 @@ export default function Carpool({ carpool, onCarpoolClick }) {
     >
       <Card className={classes.root}>
         <CardContent>
-          <Typography variant="h6" component="h2">
-            <DriveEtaSharpIcon />
-            {carpool.carpool.name}
-          </Typography>
+          <div className="carpoolHeader">
+            <DriveEtaSharpIcon className="carIcon" />
+            <Typography variant="h6" component="h2">
+              {carpool.carpool.name}
+            </Typography>
+          </div>
           <Typography className={classes.title}>
             {`From: ${carpool.carpool.from}
             To: ${carpool.carpool.to}`}

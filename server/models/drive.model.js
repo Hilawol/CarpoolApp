@@ -26,28 +26,17 @@ const driveSchema = new mongoose.Schema({
       }
     }
   },
-  cars: [{
-    driver: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-    capacity: {
-      type: Number,
-      min: 1,
-      max: 10,
-      required: true,
-    },
-    passengers:{
-      type:Array,
-      default: [],
-    },
-  }],
   passenger: {
     type: Array,
     default: []
   }
 });
+
+driveSchema.virtual('cars',{
+  ref:'Car',
+  localField:'_id',
+  foreignField:'drive'
+})
 
 const Drive = mongoose.model('Drive', driveSchema);
 module.exports = Drive;

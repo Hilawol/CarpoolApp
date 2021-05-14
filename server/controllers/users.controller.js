@@ -19,7 +19,6 @@ const getUserProfile = async (req, res) => {
 const getMyCarpools = async(req,res)=>{
   try {
     await req.user.populate('carpools.carpool').execPopulate();
-    console.log(req.user.carpools);
     return res.send(req.user.carpools);
   } catch (error) {
     console.log(error);

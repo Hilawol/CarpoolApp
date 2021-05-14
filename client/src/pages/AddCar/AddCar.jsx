@@ -6,28 +6,42 @@ import Api from "../../Api/Api";
 
 import "./addcar.css";
 
-function AddCar({ driverName, visible, onClose, onAdd }) {
+function AddCar({ driveId, driver, userToken, visible, onClose, onAdd }) {
   const [capacity, setCapacity] = useState();
-  const [driver, setDriver] = useState();
+  const [driverName, setDriverName] = useState();
   const [errMsg, setErrMsg] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(visible);
-    setDriver(driverName);
+    setDriverName(`${driver?.firstName} ${driver?.lastName}`);
   }, [visible, driverName]);
 
   const onCloseClick = () => {
     onClose();
+    setErrMsg("");
+    setCapacity(null);
   };
 
-  const onAddClick = () => {
+  const onAddClick = async () => {
     if (!isNaN(capacity) && !isNaN(parseInt(capacity))) {
-      if (capacity > 0 && capacity <= 10) {
-        return onAdd({ driver: driverName, capacity });
+      if (capacity > 0 && capacity <= 7) {
+        try {
+          const result = await Api.post(
+            `/drives/${driveId}/cars`,
+            { driver: driver._id, capacity },
+            {
+              headers: { Authorization: `Bearer ${userToken}` },
+            }
+          );
+          console.log(result.data);
+          return onAdd(result.data);
+        } catch (error) {
+          setErrMsg("An error ocuured. Please tru again.");
+        }
       }
+      return setErrMsg("Invalid value. Capacity must be between 1-7");
     }
-    return setErrMsg("Invalid value. Capacity must be between 1-10");
   };
 
   const capacityHandler = (event) => {
@@ -52,7 +66,12 @@ function AddCar({ driverName, visible, onClose, onAdd }) {
       />
       {errMsg ? <p className="errMsg">{errMsg}</p> : null}
       <div className="actionDiv">
-        <Button type="submit" text="Cancle" variant="text" onClick={onClose} />
+        <Button
+          type="submit"
+          text="Cancle"
+          variant="text"
+          onClick={onCloseClick}
+        />
         <Button
           type="submit"
           text="Add Car"

@@ -31,12 +31,14 @@ function CarpoolDahsboard({ carpoolId, user, userToken }) {
           .filter((d) => d.type === "outbound")
           .map((drive) => (
             <Drive
-              // key={drive_id}
+              key={drive._id}
+              userToken={userToken}
+              id={drive._id}
               type={drive.type}
               from={drive.from}
               to={drive.to}
               date={moment(drive.date).format("DD.MM.YYYY HH:mm")}
-              driverName={`${user.firstName} ${user.lastName}`}
+              user={user}
             />
           ))}
       </div>
@@ -45,12 +47,14 @@ function CarpoolDahsboard({ carpoolId, user, userToken }) {
           .filter((d) => d.type === "inbound")
           .map((drive) => (
             <Drive
-              // key={drive_id}
+              key={drive._id}
+              userToken={userToken}
+              id={drive._id}
               type={drive.type}
               from={drive.from}
               to={drive.to}
               date={moment(drive.date).format("DD.MM.YYYY HH:mm")}
-              driverName={`${user.firstName} ${user.lastName}`}
+              user={user}
             />
           ))}
       </div>
