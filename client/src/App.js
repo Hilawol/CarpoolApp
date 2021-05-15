@@ -22,7 +22,7 @@ function App() {
           <Route path='/' exact >
             <LandingPage />
           </Route>
-          <Route path='/myProfile' exact component={UserDashboard}/>
+          <Route path='/myProfile'  component={UserDashboard}/>
           <Route path='/signup' exact component={SignUpPage} />
           <Route path='/login' exact component={LoginPage} />
         </BrowserRouter>

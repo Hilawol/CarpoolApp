@@ -19,7 +19,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import DriveEtaSharpIcon from "@material-ui/icons/DriveEtaSharp";
 import AccountBoxSharpIcon from "@material-ui/icons/AccountBoxSharp";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Main from "./Main/Main";
 import "./userDashboard.css";
 import Api from "../../Api/Api";
@@ -98,13 +98,11 @@ export default function UserDashboard() {
   const [errMsg, setErrMsg] = useState(null);
   const [view, setView] = useState("carpools");
 
-  // const [carpoo ls, setCarpoo l s] = useState(null);
-
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     try {
-      console.log("InUseEffect");
       const token = sessionStorage.getItem("token");
       let parsedToken;
       if (token) {
@@ -112,6 +110,10 @@ export default function UserDashboard() {
         setUserToken(parsedToken);
       } else {
         throw new Error();
+      }
+
+      if (location.pathname.includes("details")) {
+        setView("profile");
       }
 
       const getUser = async () => {
@@ -268,7 +270,7 @@ export default function UserDashboard() {
             onCarpoolClick={onCarpoolClick}
           />
         ) : view === "profile" ? (
-          <UserProfile />
+          <UserProfile userData={userData} userToken={userToken} />
         ) : (
           <CarpoolDahsboard
             carpoolId={carpoolId}

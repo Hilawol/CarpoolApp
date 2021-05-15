@@ -1,0 +1,28 @@
+.userProfile {
+  background-color: #fafafa;
+  /* width: max-content; */
+  margin: auto;
+  padding: 1rem;
+}
+
+.userProfile input {
+  /* width: max-content; */
+  margin: 0.5rem 1rem;
+  border: none;
+}
+
+.userProfile fieldset {
+  background-color: white;
+  min-width: 20rem;
+  min-height: 8rem;
+  padding: 1rem;
+  width: max-content;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  border-color: transparent;
+  box-shadow: 0 10px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+.userProfile h2 {
+  color: #7a97a9;
+}
