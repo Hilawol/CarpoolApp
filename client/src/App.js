@@ -8,11 +8,9 @@ import Navbar from '../src/components/utils/Navbar/Navbar';
 import LandingPage from '../src/pages/Landing/LandingPage';
 import SignUpPage from '../src/pages/SignUp/SignUpPage';
 import LoginPage from '../src/pages/Login/LoginPage';
-import UserDashboard from './pages/UserDashboard/UserDashboard';
+import UserDashboard from '../src/pages/UserDashboard/UserDashboard';
 
 import MomentUtils from '@date-io/moment';
-
-
 
 function App() {
 
@@ -24,7 +22,7 @@ function App() {
           <Route path='/' exact >
             <LandingPage />
           </Route>
-          <Route path='/myProfile' exact component={UserDashboard} />
+          <Route path='/myProfile' exact component={UserDashboard}/>
           <Route path='/signup' exact component={SignUpPage} />
           <Route path='/login' exact component={LoginPage} />
         </BrowserRouter>
