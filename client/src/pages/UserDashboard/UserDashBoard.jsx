@@ -140,7 +140,7 @@ export default function UserDashboard() {
     console.log("logout");
     try {
       console.log(userToken);
-      const result = await Api.post(
+      await Api.post(
         "/users/logout",
         {},
         { headers: { Authorization: `Bearer ${userToken}` } }
