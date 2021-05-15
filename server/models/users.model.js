@@ -60,6 +60,9 @@ const userSchema = new mongoose.Schema({
       minLength:2,
       required:true,
       unique:true
+    },
+    carpool:{
+      
     }
   }]
 });

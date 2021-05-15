@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./passengersList.css";
 
 function PassengersList() {
   const [expanded, setExpanded] = useState(false);
+  const [passengers, setPassengers] = useState([]);
+
+  useEffect(() => {
+    const passengers = ["Eden K.", "Liam K.", "Golan K."];
+    setPassengers(passengers);
+  }, []);
 
   const onAddPassengerClick = (event) => {
     console.log("click");
@@ -24,7 +30,7 @@ function PassengersList() {
       <div
         className={`accordionContent${expanded ? " expanded" : " collapsed"}`}
       >
-        content
+        {passengers}
       </div>
     </div>
   );

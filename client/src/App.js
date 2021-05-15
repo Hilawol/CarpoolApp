@@ -20,8 +20,8 @@ function App() {
     <MuiPickersUtilsProvider utils={MomentUtils} locale="il" format="dd/MM/yyyy">
       <div>
         <BrowserRouter>
+        <Navbar />
           <Route path='/' exact >
-            <Navbar />
             <LandingPage />
           </Route>
           <Route path='/myProfile' exact component={UserDashboard} />

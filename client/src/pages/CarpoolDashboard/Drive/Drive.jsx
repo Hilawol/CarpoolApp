@@ -79,15 +79,6 @@ function Drive({ id, type, from, to, date, user, userToken }) {
       </div>
       <div className="passengersSection">
         <PassengersList />
-        {/* <button className="addPassBtn">
-          <AddCircleOutlineOutlinedIcon
-            fontSize="medium"
-            sx={{ mr: 1 }}
-            className="addIcon"
-          />
-          <PersonAddIcon className="addIcon" />
-          <span className="addCarText">Add Passenger</span>
-        </button> */}
       </div>
       <div
         className={
