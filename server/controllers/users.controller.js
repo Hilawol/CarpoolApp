@@ -1,4 +1,5 @@
 const userModel = require('../models/users.model');
+const passengerModel = require ('../models/passenger.model');
 const bcrypt = require('bcryptjs');
 
 const getAllUsers = async (req, res) => {
@@ -11,9 +12,13 @@ const getAllUsers = async (req, res) => {
 }
 
 const getUserProfile = async (req, res) => {
-  // await req.user.populate('carpools.carpool').execPopulate();
-  // console.log(req.user.carpools);
-  return res.send(req.user);
+  try {
+    await req.user.populate('passengers').execPopulate();
+    return res.send(req.user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
 }
 
 const getMyCarpools = async(req,res)=>{
@@ -91,6 +96,18 @@ const deleteUserProfile = async (req, res) => {
   }
 }
 
+const hila = async (req,res)=>{
+  try {
+    console.log(req.user);
+    // await req.user.populate('carpools.carpool').execPopulate();
+    await req.user.populate('passengers').execPopulate();
+    console.log("after pop:",req.user);
+    res.send(req.user)
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
+}
 // const addPassenger = async(req,res)=>{
 //   try {
 //     const passenger = req.body;
@@ -123,17 +140,18 @@ const addDriveToPassenger = async(req,res)=>{
   }
 }
 
-const getPassengers = async(req,res)=>{
-  try {
-    console.log(req.user);
-    // await req.user.populate('carpools.carpool').execPopulate();
-    await req.user.populate('passengers').execPopulate();
-    console.log("after pop:",req.user);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send();
-  }
-}
+// const getPassengers = async(req,res)=>{
+//   try {
+//     console.log(req.user);
+//     // await req.user.populate('carpools.carpool').execPopulate();
+
+//     await req.user.populate({path:'passengers'}).execPopulate();
+//     console.log("after pop:",req.user);
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).send();
+//   }
+// }
 
 module.exports = {
   getMyCarpools,
@@ -143,7 +161,7 @@ module.exports = {
   getUser,
   logoutUser,
   deleteUserProfile,
-  // addPassenger,
+  hila,
   addDriveToPassenger,
-  getPassengers
+  // getPassengers,
 }

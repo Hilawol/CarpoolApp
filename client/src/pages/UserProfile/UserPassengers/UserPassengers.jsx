@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
 import validator from "validator";
 import Api from "../../../Api/Api";
+import "./userPassengers.css";
 
-function UserPassengers({ passengers, userToken }) {
+function UserPassengers({ passengersArray, userToken, updateUser }) {
   const [addMode, setAddMode] = useState(false);
   const [errMsg, setErrMsg] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [mobilePhone, setMobilePhone] = useState("");
+  const [passengers, setPassengers] = useState([]);
 
   useEffect(() => {
-    const getPassengers = async () => {
-      const result = await Api.get("/users/me/passengers", {
-        headers: { Authorization: `Bearer ${userToken}` },
-      });
-      console.log(result.data);
-    };
-    getPassengers();
-  }, []);
+    console.log(passengersArray);
+    setPassengers(passengersArray);
+  }, [passengersArray]);
 
   const onAddClick = () => {
     setAddMode(true);
@@ -25,6 +22,7 @@ function UserPassengers({ passengers, userToken }) {
 
   const onCancelAdd = () => {
     setAddMode(false);
+    setErrMsg(null);
     //TODO:reset inputs
   };
 
@@ -55,9 +53,15 @@ function UserPassengers({ passengers, userToken }) {
       });
 
       console.log(result.data);
-    } catch (error) {}
-    console.log("save:", passenger);
-    setAddMode(false);
+      updateUser();
+      // setAddMode(false);
+    } catch (error) {
+      error.response.status == 409
+        ? setErrMsg("Passenger alrady exists. Please provide a different name")
+        : setErrMsg("Error occured. Please try again");
+      console.log("save:");
+    }
+
     //TODO:reset inputs
   };
 
@@ -91,9 +95,9 @@ function UserPassengers({ passengers, userToken }) {
         Save
       </button>
       <button className="btn" onClick={onCancelAdd}>
-        Cancel
+        Done
       </button>
-      {errMsg ? <div>{errMsg}</div> : null}
+      {errMsg ? <div className="errMsg">{errMsg}</div> : null}
     </div>
   );
 
@@ -109,9 +113,17 @@ function UserPassengers({ passengers, userToken }) {
               <button className="addPassBtn">
                 <i className="fas fa-user-plus" onClick={onAddClick}></i>
               </button>
-            ) : null}
+            ) : (
+              addBlock
+            )}
           </div>
-          {addMode ? addBlock : null}
+          <div className="passengersList">
+            <ul>
+              {passengers?.map((p, i) => (
+                <li key="i">{`${p.name}  ${p.phone ? p.phone : ""}`}</li>
+              ))}
+            </ul>
+          </div>
         </fieldset>
       </div>
     </div>

@@ -19,6 +19,8 @@ const addPassenger= async (req,res)=>{
     })
     
     await passenger.save()
+    req.user.passengers.push(passenger._id);
+    await req.user.save();
     res.send(passenger);
   } catch (error) {
     console.log(error);
@@ -50,9 +52,21 @@ const getPassengers = async(req,res)=>{
   }
 }
 
+const getOwnerPassengers = async (req,res)=>{
+  try {
+    const ownerId = req.params.id;
+    const passengers = await passengerModel.find({ owner :  ownerId });
+    res.send(passengers);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
+}
+
 module.exports ={
   addPassenger,
   addDrive,
-  getPassengers
+  getPassengers,
+  getOwnerPassengers
 }
 

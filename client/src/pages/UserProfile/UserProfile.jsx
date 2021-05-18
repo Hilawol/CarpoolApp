@@ -3,19 +3,21 @@ import UserDetails from "./UserDetails/UserDetails";
 import UserPassengers from "./UserPassengers/UserPassengers";
 import "./userProfile.css";
 
-function UserProfile({ userData, userToken }) {
-  const [user, setUser] = useState("");
+function UserProfile({ userData, userToken, updateUser }) {
   const [passengers, setPassengers] = useState([]);
-
   useEffect(() => {
-    setUser(userData);
     setPassengers(userData.passengers);
+    console.log(userData.passengers);
   }, [userData]);
 
   return (
     <div className="userProfile">
       <UserDetails userData={userData} />
-      <UserPassengers passengers={passengers} userToken={userToken} />
+      <UserPassengers
+        passengersArray={passengers}
+        userToken={userToken}
+        updateUser={updateUser}
+      />
     </div>
   );
 }

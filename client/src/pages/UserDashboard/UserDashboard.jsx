@@ -115,28 +115,29 @@ export default function UserDashboard() {
       if (location.pathname.includes("details")) {
         setView("profile");
       }
-
-      const getUser = async () => {
-        try {
-          const result = await Api.get("/users/me", {
-            headers: { Authorization: `Bearer ${parsedToken}` },
-          });
-          console.log("userData:", result?.data);
-          setUserData(result.data);
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
-          setErrMsg("Error occured please try again.");
-          setLoading(false);
-        }
-      };
-      getUser();
+      getUser(parsedToken);
     } catch (error) {
       console.log("error:", error);
       setErrMsg("Error occured please try again.");
       setLoading(false);
     }
   }, []);
+
+  const getUser = async (userToken) => {
+    try {
+      console.log(userToken);
+      const result = await Api.get("/users/me", {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      console.log("userData:", result?.data);
+      setUserData(result.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setErrMsg("Error occured please try again.");
+      setLoading(false);
+    }
+  };
 
   const onLogout = async () => {
     console.log("logout");
@@ -169,6 +170,10 @@ export default function UserDashboard() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const updateUser = (userData) => {
+    getUser(userToken);
   };
 
   return errMsg ? (
@@ -268,14 +273,20 @@ export default function UserDashboard() {
             userToken={userToken}
             userData={userData}
             onCarpoolClick={onCarpoolClick}
+            updateUser={updateUser}
           />
         ) : view === "profile" ? (
-          <UserProfile userData={userData} userToken={userToken} />
+          <UserProfile
+            userData={userData}
+            userToken={userToken}
+            updateUser={updateUser}
+          />
         ) : (
           <CarpoolDahsboard
             carpool={carpool}
             user={userData}
             userToken={userToken}
+            updateUser={updateUser}
           />
         )}
       </main>

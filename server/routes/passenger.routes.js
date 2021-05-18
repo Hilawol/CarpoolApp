@@ -9,6 +9,8 @@ router.post('/', auth, (req, res) => {
   passengerController.addDrive(req, res);
 }).get('/drive/:id',auth,(req,res)=>{
   passengerController.getPassengers(req,res);
+}).get('/owner/:id',auth,(req,res)=>{
+  passengerController.getOwnerPassengers(req,res);
 })
 
 module.exports = router;

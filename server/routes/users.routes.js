@@ -7,10 +7,13 @@ router.get('/me', auth, (req, res) => {
   usersController.getUserProfile(req, res);
 }).delete('/me', auth, (req, res) => {
   usersController.deleteUserProfile(req, res);
-}).get('/me/carpools',auth,(req,res)=>{
+
+}).get('/hila',auth,(req,res)=>{
+  usersController.hila(req,res);
+})
+
+.get('/me/carpools',auth,(req,res)=>{
   usersController.getMyCarpools(req,res);
-}).get('me/passengers',auth,(req,res)=>{
-  usersController.getPassengers(req,res);
 }).post('/me/passengers/drives',auth,(req,res)=>{
   usersController.addDriveToPassenger(req,res);
 }).post('/signup', (req, res) => { //Create new user

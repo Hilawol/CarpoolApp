@@ -37,10 +37,11 @@ function CarpoolDahsboard({ carpool, user, userToken }) {
   const onAddPassenger = async (addData) => {
     try {
       closeAddPassengers();
-      const { data } = await Api.post(`/users/me/passengers/drives`, addData, {
-        headers: { Authorization: `Bearer ${userToken}` },
-      });
-      console.log(data);
+      console.log(addData);
+      // const { data } = await Api.post(`/users/me/passengers/drives`, addData, {
+      //   headers: { Authorization: `Bearer ${userToken}` },
+      // });
+      // console.log(data);
     } catch (error) {}
   };
   return (

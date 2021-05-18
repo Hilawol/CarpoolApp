@@ -39,11 +39,11 @@ const driveSchema = new mongoose.Schema({
 var opts = {}
 opts.toJSON = { virtuals: true }
 
-driveSchema.virtual('passengers',{
-  ref:'Passenger',
-  localField:'_id',
-  foreignField:'drives.drive'
-})
+// driveSchema.virtual('passengers',{
+//   ref:'Passenger',
+//   localField:'_id',
+//   foreignField:'drives.drive'
+// })
 
 driveSchema.virtual('cars',{
   ref:'Car',

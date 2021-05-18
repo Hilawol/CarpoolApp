@@ -56,11 +56,6 @@ function AddPassengers({
     );
   };
 
-  // const handleRadio = (event) => {
-  //   console.log(event.target.id);
-  //   setRadioValue(event.target.id);
-  // };
-
   const handleAdd = () => {
     console.log(drives);
     const pass = passengers.filter((p) => p.checked);

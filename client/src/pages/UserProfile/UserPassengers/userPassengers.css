@@ -1,0 +1,9 @@
+.passengersList li {
+  list-style: none;
+  margin: 0.5rem 0;
+}
+
+.passengersList li:hover {
+  background-color: #aad2eb;
+  font-weight: bold;
+}

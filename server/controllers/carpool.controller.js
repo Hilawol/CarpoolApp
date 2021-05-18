@@ -104,7 +104,7 @@ const getAllUsers = async (req, res) => {
 
 const addDrive = async (req, res) => {
   try {
-    console.log("params:",req.params,"body:",req.body);
+
     const carpoolId = req.params.id;
     const carpoolType = req.body.type;
     
