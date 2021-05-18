@@ -2,7 +2,7 @@ const { Mongoose } = require('mongoose');
 const Passenger = require('../models/passenger.model');
 const passengerModel = require('../models/passenger.model');
 
-const addPassenger= async (req,res)=>{
+const createPassenger= async (req,res)=>{
   try {
    const {name,phone}=req.body;
   const owner=req.user._id;
@@ -63,10 +63,28 @@ const getOwnerPassengers = async (req,res)=>{
   }
 }
 
+const AddPassengersToDrive = async (req,res)=>{
+  try {
+    const data = req.body;
+    for(let i=0;i<data.length;i++){
+      const passenger = await passengerModel.findById(data[i].passenger);
+      for(let j=0;j<data[i].drives.length;j++){
+        passenger.drives.push(data[i].drives[j]);
+        await passenger.save();
+      }
+    }
+    console.log(req.body);
+    res.send();
+  } catch (error) {
+    
+  }
+}
+
 module.exports ={
-  addPassenger,
+  createPassenger,
   addDrive,
   getPassengers,
-  getOwnerPassengers
+  getOwnerPassengers,
+  AddPassengersToDrive
 }
 
