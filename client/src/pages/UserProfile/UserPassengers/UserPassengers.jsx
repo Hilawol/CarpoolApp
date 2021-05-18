@@ -40,9 +40,10 @@ function UserPassengers({ passengers, userToken }) {
     }
 
     try {
-      const result = await Api.post("users/me/passengers", passenger, {
+      const result = await Api.post("passengers", passenger, {
         headers: { Authorization: `Bearer ${userToken}` },
       });
+
       console.log(result.data);
     } catch (error) {}
     console.log("save:", passenger);

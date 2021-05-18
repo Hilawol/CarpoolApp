@@ -11,9 +11,13 @@ router.get('/me', auth, (req, res) => {
   usersController.getMyCarpools(req,res);
 }).post('/me/passengers/drives',auth,(req,res)=>{
   usersController.addDriveToPassenger(req,res);
-}).post('/me/passengers',auth,(req,res)=>{
-  usersController.addPassenger(req,res);
-}).post('/signup', (req, res) => { //Create new user
+})
+
+// .post('/me/passengers',auth,(req,res)=>{
+//   usersController.addPassenger(req,res);
+// })
+
+.post('/signup', (req, res) => { //Create new user
   usersController.signupUser(req, res);
 }).post('/login', (req, res) => {
   usersController.loginUser(req, res);

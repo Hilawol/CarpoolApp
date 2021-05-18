@@ -4,11 +4,20 @@ const passengerModel = require('../models/passenger.model');
 
 const addPassenger= async (req,res)=>{
   try {
-   const {name,owner}=req.body;
+   const {name,phone}=req.body;
+  const owner=req.user._id;
+
+  //Avoids repetitve passenger with same name for user owner. 
+   const pass = await passengerModel.findOne({name:name,owner:owner});
+   if (pass){
+     return res.status(409).send();
+   }
     const passenger = new passengerModel({
       name,
-      owner
+      phone,
+      owner,
     })
+    
     await passenger.save()
     res.send(passenger);
   } catch (error) {
