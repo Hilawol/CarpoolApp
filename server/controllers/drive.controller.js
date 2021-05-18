@@ -1,5 +1,6 @@
 const driveModel = require('../models/drive.model');
 const carModel = require('../models/car.model');
+const userModel = require('../models/users.model');
 const { populate } = require('../models/drive.model');
 
 const createDrive = async (req, res) => {
@@ -51,7 +52,6 @@ const addCar = async(req,res)=>{
 
 const getCars = async(req,res)=>{
   try {
-    console.log("getCars")
     const driveId = req.params.id;
     let drive;
     try {
@@ -74,8 +74,42 @@ const getCars = async(req,res)=>{
   }
 }
 
+const getDrivePassengers = async(req,res)=>{
+  try {
+    console.log("getting passengers for dirve");
+    const driveId = req.params.id;
+    
+    try {
+
+      let drive = await driveModel.findById("60a294342d8af08561865bce");
+      console.log(drive);
+      await drive.populate({path:'passengers'}).execPopulate();
+      // await drive.populate({path:'cars', populate:{path:'driver'}}).execPopulate();
+      // //  drive = await driveModel.findById(driveId).populate({path:'passengers'});
+      //  drive = await driveModel.findById(driveId);
+      //  await drive.populate({path:'passengers'}).execPopulate();
+      //  console.log("drive:",drive);
+      // //  console.log(drive);
+      // return res.json({drive:drive});
+      // console.log(driveId)
+      // await userModel.findOne({ _id: decoded._id, 'tokens.token': token });
+      // const pass = await userModel.findOne({'passengers.name':'Eden Kershenovich'});
+      // console.log(pass)
+     return res.send(drive);
+     
+    } catch (error) {
+      console.log(error);
+      return res.status(404).send();
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+}
+
 module.exports = {
   createDrive,
   addCar,
-  getCars
+  getCars,
+  getDrivePassengers
 }

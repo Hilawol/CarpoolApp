@@ -59,11 +59,27 @@ const userSchema = new mongoose.Schema({
       trim:true,
       minLength:2,
       required:true,
-      unique:true
     },
-    carpool:{
-      
-    }
+    phone:{
+      type:String,
+      trim:true,
+      validtae(value){
+        if(!validator.isMobilePhone(mobilePhone.trim(), "he-IL")){
+          throw new Error('Invalid phone number');
+        }
+      }
+    },
+    drives:[{
+      drive:{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref:'Drive',
+        required:true
+      },
+      car:{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref:'Car'
+      }
+    }]
   }]
 });
 

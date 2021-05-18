@@ -15,7 +15,7 @@ function UserProfile({ userData, userToken }) {
   return (
     <div className="userProfile">
       <UserDetails userData={userData} />
-      <UserPassengers passengers={passengers} />
+      <UserPassengers passengers={passengers} userToken={userToken} />
     </div>
   );
 }

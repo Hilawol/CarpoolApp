@@ -1,0 +1,20 @@
+input.passBox,
+input.driveBox,
+input.passRadio {
+  margin: 0 1rem;
+}
+
+.addPassengersTitle {
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+.addPassenger .actionDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.addPassenger .actionDiv .btn {
+  margin: 0;
+}

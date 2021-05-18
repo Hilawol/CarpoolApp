@@ -5,10 +5,14 @@ const auth = require('../middlewares/auth');
 
 router.get('/me', auth, (req, res) => {
   usersController.getUserProfile(req, res);
-}).get('/me/carpools',auth,(req,res)=>{
-  usersController.getMyCarpools(req,res);
 }).delete('/me', auth, (req, res) => {
   usersController.deleteUserProfile(req, res);
+}).get('/me/carpools',auth,(req,res)=>{
+  usersController.getMyCarpools(req,res);
+}).post('/me/passengers/drives',auth,(req,res)=>{
+  usersController.addDriveToPassenger(req,res);
+}).post('/me/passengers',auth,(req,res)=>{
+  usersController.addPassenger(req,res);
 }).post('/signup', (req, res) => { //Create new user
   usersController.signupUser(req, res);
 }).post('/login', (req, res) => {
@@ -17,7 +21,4 @@ router.get('/me', auth, (req, res) => {
   usersController.logoutUser(req, res);
 });
 
-// }).delete('/me', auth, (req, res) => {
-//   usersController.userDeleteMe(req, res);
-// });
 module.exports = router;

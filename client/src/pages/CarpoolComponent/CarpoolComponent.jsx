@@ -28,14 +28,10 @@ const useStyles = makeStyles({
 
 export default function Carpool({ carpool, onCarpoolClick }) {
   const classes = useStyles();
-  // const bull = <span className={classes.bullet}>•</span>;
 
   console.log(carpool.carpool);
   return carpool.carpool ? (
-    <div
-      className="carpool"
-      onClick={() => onCarpoolClick(carpool.carpool._id)}
-    >
+    <div className="carpool" onClick={() => onCarpoolClick(carpool.carpool)}>
       <Card className={classes.root}>
         <CardContent>
           <div className="carpoolHeader">

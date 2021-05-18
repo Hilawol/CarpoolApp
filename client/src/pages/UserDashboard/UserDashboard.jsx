@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 export default function UserDashboard() {
   const [userData, setUserData] = useState(null);
   const [userToken, setUserToken] = useState(null);
-  const [carpoolId, setCarpoolId] = useState(null);
+  const [carpool, setCarpool] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
   const [view, setView] = useState("carpools");
@@ -154,9 +154,9 @@ export default function UserDashboard() {
     }
   };
 
-  const onCarpoolClick = (carpoolId) => {
+  const onCarpoolClick = (carpool) => {
     setView("carpoolDashboard");
-    setCarpoolId(carpoolId);
+    setCarpool(carpool);
   };
 
   const classes = useStyles();
@@ -273,7 +273,7 @@ export default function UserDashboard() {
           <UserProfile userData={userData} userToken={userToken} />
         ) : (
           <CarpoolDahsboard
-            carpoolId={carpoolId}
+            carpool={carpool}
             user={userData}
             userToken={userToken}
           />

@@ -68,7 +68,7 @@ function AddCar({ driveId, driver, userToken, visible, onClose, onAdd }) {
       <div className="actionDiv">
         <Button
           type="submit"
-          text="Cancle"
+          text="Cancel"
           variant="text"
           onClick={onCloseClick}
         />

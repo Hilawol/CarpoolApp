@@ -16,7 +16,7 @@
   min-height: 64px;
 }
 
-.addPassBtn {
+/* .addPassBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,10 +30,6 @@
   border-color: inherit;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.2);
-}
-
-/* .addPassBtn:hover.fa-user-plus {
-  color: white;
 } */
 
 .expandBtn {

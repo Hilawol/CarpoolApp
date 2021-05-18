@@ -76,7 +76,6 @@ h3 {
 .addCarText {
   font-size: 1rem;
   color: #575b63;
-  /* font-weight: bold; */
 }
 
 .carsSection {
@@ -93,19 +92,3 @@ h3 {
 .passengersSection {
   border-radius: 20px;
 }
-
-/* button.addPassBtn {
-  z-index: 100;
-  border: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50px;
-  background-color: white;
-}
-
-button.addPassBtn:hover {
-  border-color: inherit;
-  box-shadow: var(--boxShadow);
-  cursor: pointer;
-  background-color: #606357 !important;
-} */

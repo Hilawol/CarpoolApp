@@ -1,10 +1,59 @@
-.CarpoolDashBoard {
+.carpoolHeader {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+
+.addIcon {
+  margin-right: 0.5rem;
+  color: #575b63;
+}
+
+.inviteText {
+  font-size: 1rem;
+}
+.inviteIcon {
+  margin-right: 0.5rem;
+}
+.addPassBtn,
+.inviteBtn {
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  border-radius: 20px;
+  border: none;
+  height: 3rem;
+  border: 2px solid transparent;
+}
+
+.addPassBtn:hover,
+.inviteBtn:hover {
+  cursor: pointer;
+  border: 2px solid #575b63;
+}
+
+.inviteBtn {
+  background-color: #ee9b36;
+  color: white;
+  margin-left: 2rem;
+}
+
+.inviteText,
+.inviteIcon {
+  color: white;
+}
+
+.addPassBtn {
+  background-color: #61cac7;
+}
+.drives {
   display: grid;
   grid-template-columns: 50% 50%;
   max-height: calc(100vh - 64px);
 }
-
-.drivesContainer {
+.driveContainer {
   width: 100%;
   height: max-content;
   min-height: 50vh;

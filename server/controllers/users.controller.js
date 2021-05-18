@@ -85,9 +85,40 @@ const logoutUser = async (req, res) => {
 const deleteUserProfile = async (req, res) => {
   try {
     await req.user.remove();
-    res.send(req.user);
+   return  res.send(req.user);
   } catch (error) {
-    res.status(500).send();
+    return res.status(500).send();
+  }
+}
+
+const addPassenger = async(req,res)=>{
+  try {
+    const passenger = req.body;
+    req.user.passengers.push(passenger);
+    await req.user.save();
+    return res.status(201).send(req.user.passengers);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
+}
+
+const addDriveToPassenger = async(req,res)=>{
+  try {
+
+    const passengers = req.user.passengers;
+    req.body.forEach(p => {
+      const pass = passengers.find(element => element._id==p.passenger);
+      if (pass){
+        p.drives.forEach(d=>{
+          pass.drives.push({drive:d});
+        })
+      }
+    });
+    await req.user.save();
+    return res.status(201).send();
+  } catch (error) {
+    
   }
 }
 
@@ -98,5 +129,8 @@ module.exports = {
   loginUser,
   getUser,
   logoutUser,
-  deleteUserProfile
+  deleteUserProfile,
+  addPassenger,
+  addDriveToPassenger
+
 }

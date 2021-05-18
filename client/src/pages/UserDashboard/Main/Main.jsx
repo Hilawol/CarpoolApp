@@ -79,10 +79,6 @@ function Main({ userToken, userData, onCarpoolClick }) {
       ) : (
         <h3>No carpools yet</h3>
       )}
-      {/* <CarpoolCollection
-        carpoolsArray={carpools}
-        onCarpoolClick={onCarpoolClick}
-      /> */}
     </div>
   );
 }

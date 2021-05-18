@@ -26,17 +26,36 @@ const driveSchema = new mongoose.Schema({
       }
     }
   },
-  passenger: {
-    type: Array,
-    default: []
-  }
-});
+
+  // passengers:[{
+  //   id:{
+  //     type: mongoose.SchemaTypes.ObjectId,
+  //     unique:true
+  //   },
+  // }]
+
+},opts);
+
+var opts = {}
+opts.toJSON = { virtuals: true }
+
+driveSchema.virtual('passengers',{
+  ref:'Passenger',
+  localField:'_id',
+  foreignField:'drives.drive'
+})
 
 driveSchema.virtual('cars',{
   ref:'Car',
   localField:'_id',
   foreignField:'drive'
 })
+
+// driveSchema.virtual('passengers',{
+//   ref:'User',
+//   localField:'_id',
+//   foreignField:'passengers.drives.drive'
+// })
 
 const Drive = mongoose.model('Drive', driveSchema);
 module.exports = Drive;

@@ -5,6 +5,8 @@ const auth = require('../middlewares/auth');
 
 router.post('/',auth, (req, res) => {
   driveController.createDrive(req, res);
+}).get('/:id/passengers',auth,(req,res)=>{
+  driveController.getDrivePassengers(req,res);
 }).post('/:id/cars',auth,(req,res)=>{
   driveController.addCar(req,res);
 }).get('/:id/cars',auth,(req,res)=>{

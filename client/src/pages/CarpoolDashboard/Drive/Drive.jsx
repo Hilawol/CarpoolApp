@@ -8,7 +8,7 @@ import Car from "../Car/Car";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PassengersList from "./PassengersList/PassengersList";
 
-function Drive({ id, type, from, to, date, user, userToken }) {
+function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
   const [openAddCar, setOpenAddCar] = useState(false);
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,17 +68,13 @@ function Drive({ id, type, from, to, date, user, userToken }) {
               type === "outbound" ? "outBkg addCarBtn" : "inBkg addCarBtn"
             }
           >
-            <AddCircleOutlineOutlinedIcon
-              fontSize="medium"
-              sx={{ mr: 1 }}
-              className="addIcon"
-            />
+            <i className="fas fa-car addIcon"></i>
             <span className="addCarText">Add Car</span>
           </button>
         </div>
       </div>
       <div className="passengersSection">
-        <PassengersList />
+        <PassengersList onAddPassenger={onAddPassenger} />
       </div>
       <div
         className={

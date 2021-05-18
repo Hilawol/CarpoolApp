@@ -26,3 +26,24 @@
 .userProfile h2 {
   color: #7a97a9;
 }
+
+.userProfile .addPassBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  margin: 0.5rem;
+}
+
+.addBlock input {
+  border: 1px solid #ebebeb;
+  line-height: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.userProfile .btn {
+  border-radius: 0;
+  height: 1.8rem;
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
