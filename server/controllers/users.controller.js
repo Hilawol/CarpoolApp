@@ -91,17 +91,17 @@ const deleteUserProfile = async (req, res) => {
   }
 }
 
-const addPassenger = async(req,res)=>{
-  try {
-    const passenger = req.body;
-    req.user.passengers.push(passenger);
-    await req.user.save();
-    return res.status(201).send(req.user.passengers);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send();
-  }
-}
+// const addPassenger = async(req,res)=>{
+//   try {
+//     const passenger = req.body;
+//     req.user.passengers.push(passenger);
+//     await req.user.save();
+//     return res.status(201).send(req.user.passengers);
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).send();
+//   }
+// }
 
 const addDriveToPassenger = async(req,res)=>{
   try {
@@ -118,7 +118,20 @@ const addDriveToPassenger = async(req,res)=>{
     await req.user.save();
     return res.status(201).send();
   } catch (error) {
-    
+    console.log(error);
+    return res.status(500).send();
+  }
+}
+
+const getPassengers = async(req,res)=>{
+  try {
+    console.log(req.user);
+    // await req.user.populate('carpools.carpool').execPopulate();
+    await req.user.populate('passengers').execPopulate();
+    console.log("after pop:",req.user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
   }
 }
 
@@ -130,7 +143,7 @@ module.exports = {
   getUser,
   logoutUser,
   deleteUserProfile,
-  addPassenger,
-  addDriveToPassenger
-
+  // addPassenger,
+  addDriveToPassenger,
+  getPassengers
 }

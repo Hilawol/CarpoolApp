@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import validator from "validator";
 import Api from "../../../Api/Api";
 
@@ -8,6 +8,16 @@ function UserPassengers({ passengers, userToken }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [mobilePhone, setMobilePhone] = useState("");
+
+  useEffect(() => {
+    const getPassengers = async () => {
+      const result = await Api.get("/users/me/passengers", {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      console.log(result.data);
+    };
+    getPassengers();
+  }, []);
 
   const onAddClick = () => {
     setAddMode(true);

@@ -53,35 +53,13 @@ const userSchema = new mongoose.Schema({
       required: true,
     }
   }],
-  // passengers:[{
-  //   name:{
-  //     type:String,
-  //     trim:true,
-  //     minLength:2,
-  //     required:true,
-  //   },
-  //   phone:{
-  //     type:String,
-  //     trim:true,
-  //     validtae(value){
-  //       if(!validator.isMobilePhone(mobilePhone.trim(), "he-IL")){
-  //         throw new Error('Invalid phone number');
-  //       }
-  //     }
-  //   },
-  //   drives:[{
-  //     drive:{
-  //       type: mongoose.SchemaTypes.ObjectId,
-  //       ref:'Drive',
-  //       required:true
-  //     },
-  //     car:{
-  //       type: mongoose.SchemaTypes.ObjectId,
-  //       ref:'Car'
-  //     }
-  //   }]
-  // }]
 });
+
+userSchema.virtual('passengers',{
+  ref:'Passenger',
+  localField:'_id',
+  foreignField:'owner'
+})
 
 userSchema.methods.toJSON = function () {
   const user = this;
