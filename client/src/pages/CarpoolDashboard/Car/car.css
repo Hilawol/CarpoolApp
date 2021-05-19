@@ -1,9 +1,34 @@
 .car {
   width: 200px;
-  height: 100px;
+  height: max-content;
   border: 2px solid #eeefee;
   border-radius: 1rem;
   background-color: white;
   margin: 0.5rem 0.5rem 0.5rem 0.5rem;
   padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.car span {
+  margin: 0.5rem;
+}
+
+.carAvailability {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.carNumber span {
+  margin: 0.2rem;
+}
+
+.carFooter {
+  display: flex;
+  color: gray;
+  justify-content: space-between;
+}
+
+.car .icon {
+  cursor: pointer;
 }

@@ -28,10 +28,10 @@ const carpoolSchema = new mongoose.Schema({
   date: {
     type: Date
   },
-  passengers: {
-    type: [mongoose.SchemaTypes.ObjectId],
-    default: []
-  },
+  // passengers: {
+  //   type: [mongoose.SchemaTypes.ObjectId],
+  //   default: []
+  // },
   users: {
     type: [{
       type: mongoose.SchemaTypes.ObjectId,

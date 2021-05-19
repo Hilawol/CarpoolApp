@@ -14,23 +14,11 @@
 
 .accordionContent {
   min-height: 64px;
+  border: 3px solid rgba(0, 0, 0, 0.03);
+  border-top: none;
+  padding: 0.5rem;
+  border-radius: 20px;
 }
-
-/* .addPassBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50px;
-  background-color: white;
-}
-
-.addPassBtn:hover {
-  border-color: inherit;
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.2);
-} */
 
 .expandBtn {
   cursor: pointer;
@@ -42,4 +30,14 @@
 
 .collapsed {
   display: none;
+}
+
+.assignIcon {
+  margin: 1rem;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.assignIcon:hover {
+  color: black;
 }

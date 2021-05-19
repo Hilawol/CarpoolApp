@@ -20,7 +20,7 @@ const carSchema = new mongoose.Schema({
   passengers:{
     type:Array,
     default: [],
-  }
+  },
 });
 
 const Car = mongoose.model('Car', carSchema);

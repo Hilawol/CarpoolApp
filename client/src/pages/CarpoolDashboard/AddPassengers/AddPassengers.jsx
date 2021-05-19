@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "../../../components/utils/Modal/Modal";
 import Button from "../../../components/utils/Button/Button";
 import "./addPassengers.css";
+import Api from "../../../Api/Api";
 
 function AddPassengers({
   visible,
@@ -9,6 +10,7 @@ function AddPassengers({
   onAddClick,
   passengersArray,
   drivesArray,
+  userToken,
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [errMsg, setErrMsg] = useState(null);
@@ -56,7 +58,7 @@ function AddPassengers({
     );
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     console.log(drives);
     const pass = passengers.filter((p) => p.checked);
     if (!pass.length > 0) {
@@ -74,14 +76,17 @@ function AddPassengers({
       });
       toAdd.push({ passenger: p.passenger._id, drives: drives });
     });
-    // console.log(toAdd);
-    // const arr = passengers
-    //   .filter((p) => p.checked)
-    //   .map((p) => {
-    //     return { passenger: p.passenger._id, trip: radioValue };
-    //   });
 
-    onAddClick(toAdd);
+    try {
+      // console.log(addData);
+      const { data } = await Api.post(`/passengers/drives`, toAdd, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      onAddClick(toAdd);
+      // console.log(data);
+    } catch (error) {
+      setErrMsg("Error ocurred please try again");
+    }
   };
 
   const content = (
@@ -128,41 +133,6 @@ function AddPassengers({
           </div>
         );
       })}
-
-      {/* <div>
-        <input
-          type="radio"
-          id="roundtrip"
-          name="drive"
-          value="roundtrip"
-          className="passRadio"
-          onChange={handleRadio}
-          defaultChecked={true}
-        />
-        <label for="round">Round trip</label>
-      </div>
-      <div>
-        <input
-          type="radio"
-          id="outbound"
-          name="drive"
-          value="outbound"
-          className="passRadio"
-          onChange={handleRadio}
-        />
-        <label for="current">Leaving</label>
-      </div>
-      <div>
-        <input
-          type="radio"
-          id="inbound"
-          name="drive"
-          value="inbound"
-          className="passRadio"
-          onChange={handleRadio}
-        />
-        <label for="current">Returning</label>
-      </div> */}
       <br />
       {errMsg ? <p className="errMsg">{errMsg}</p> : null}
       <hr />

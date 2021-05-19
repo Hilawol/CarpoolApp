@@ -5,25 +5,30 @@ import Api from "../../Api/Api";
 import moment from "moment";
 import AddPassengers from "./AddPassengers/AddPassengers";
 
-function CarpoolDahsboard({ carpool, user, userToken }) {
+function CarpoolDahsboard({ carpool, user, userToken, updateUser }) {
   const [drives, setDrives] = useState([]);
   const [showAddPassenger, setShowAddPassenger] = useState(false);
 
+  const getDrives = async () => {
+    try {
+      const { data } = await Api.get(`/carpools/${carpool._id}/drives/`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      console.log("data=", data);
+      setDrives(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     //get all carpool drives
-    const getDrives = async () => {
-      try {
-        const { data } = await Api.get(`/carpools/${carpool._id}/drives/`, {
-          headers: { Authorization: `Bearer ${userToken}` },
-        });
-        console.log("data=", data);
-        setDrives(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+
     getDrives();
-  }, []);
+  }, [user]);
+
+  // useEffect(() => {
+  //   console.log("carpooldashboard useeffect");
+  // }, [user]);
 
   const openAddPassengers = () => {
     console.log("open");
@@ -35,14 +40,8 @@ function CarpoolDahsboard({ carpool, user, userToken }) {
   };
 
   const onAddPassenger = async (addData) => {
-    try {
-      closeAddPassengers();
-      console.log(addData);
-      const { data } = await Api.post(`/passengers/drives`, addData, {
-        headers: { Authorization: `Bearer ${userToken}` },
-      });
-      console.log(data);
-    } catch (error) {}
+    updateUser();
+    closeAddPassengers();
   };
   return (
     <div className="CarpoolDashBoard">
@@ -103,6 +102,7 @@ function CarpoolDahsboard({ carpool, user, userToken }) {
           visible={showAddPassenger}
           onCloseClick={closeAddPassengers}
           onAddClick={onAddPassenger}
+          userToken={userToken}
         />
       ) : null}
       {/* <div className="passengersContainer"></div> */}

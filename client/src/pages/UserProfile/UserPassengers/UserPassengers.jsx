@@ -23,7 +23,15 @@ function UserPassengers({ passengersArray, userToken, updateUser }) {
   const onCancelAdd = () => {
     setAddMode(false);
     setErrMsg(null);
-    //TODO:reset inputs
+    reset();
+  };
+
+  const reset = () => {
+    console.log("reset");
+    setErrMsg(null);
+    setFirstName("");
+    setLastName("");
+    setMobilePhone("");
   };
 
   const onSavePassengers = async () => {
@@ -54,6 +62,7 @@ function UserPassengers({ passengersArray, userToken, updateUser }) {
 
       console.log(result.data);
       updateUser();
+      reset();
       // setAddMode(false);
     } catch (error) {
       error.response.status == 409
@@ -61,8 +70,6 @@ function UserPassengers({ passengersArray, userToken, updateUser }) {
         : setErrMsg("Error occured. Please try again");
       console.log("save:");
     }
-
-    //TODO:reset inputs
   };
 
   const firstNameHandler = (event) => {
@@ -86,11 +93,16 @@ function UserPassengers({ passengersArray, userToken, updateUser }) {
   const addBlock = (
     <div className="addBlock">
       <label htmlFor="fname">First Name:</label>
-      <input type="text" onChange={firstNameHandler} />
+      <input type="text" onChange={firstNameHandler} value={firstName} />
       <label htmlFor="">Last Name:</label>
-      <input type="text" onChange={lastNameHandler} />
+      <input type="text" onChange={lastNameHandler} value={lastName} />
       <label htmlFor="">Mobile Phone:</label>
-      <input type="text" placeholder="Optional" onChange={phoneHandler} />
+      <input
+        type="text"
+        placeholder="Optional"
+        onChange={phoneHandler}
+        value={mobilePhone}
+      />
       <button className="btn" onClick={onSavePassengers}>
         Save
       </button>
@@ -120,7 +132,7 @@ function UserPassengers({ passengersArray, userToken, updateUser }) {
           <div className="passengersList">
             <ul>
               {passengers?.map((p, i) => (
-                <li key="i">{`${p.name}  ${p.phone ? p.phone : ""}`}</li>
+                <li key={i}>{`${p.name}  ${p.phone ? p.phone : ""}`}</li>
               ))}
             </ul>
           </div>

@@ -11,25 +11,43 @@ import PassengersList from "./PassengersList/PassengersList";
 function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
   const [openAddCar, setOpenAddCar] = useState(false);
   const [cars, setCars] = useState([]);
+  const [passengers, setPassengers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
 
   useEffect(() => {
+    console.log("drive useeffect user:", user);
+    setLoading(true);
     const getCars = async () => {
       try {
-        setLoading(true);
+        // setLoading(true);
         const result = await Api.get(`/drives/${id}/cars`, {
           headers: { Authorization: `Bearer ${userToken}` },
         });
         setCars(result.data);
+        // setLoading(false);
+      } catch (error) {
+        setErrMsg("An error ocurred. Please try again.");
         setLoading(false);
+      }
+    };
+
+    const getPassengers = async () => {
+      try {
+        const result = await Api.get(`/passengers/drive/${id}`, {
+          headers: { Authorization: `Bearer ${userToken}` },
+        });
+        console.log("passengers:", result.data);
+        setPassengers(result.data);
       } catch (error) {
         setErrMsg("An error ocurred. Please try again.");
         setLoading(false);
       }
     };
     getCars();
-  }, []);
+    getPassengers();
+    setLoading(false);
+  }, [user]);
 
   const onAddCarClick = () => {
     setOpenAddCar(true);
@@ -74,7 +92,7 @@ function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
         </div>
       </div>
       <div className="passengersSection">
-        <PassengersList onAddPassenger={onAddPassenger} />
+        <PassengersList passengers={passengers} cars={cars} />
       </div>
       <div
         className={
@@ -96,7 +114,9 @@ function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
         ) : !cars.length > 0 ? (
           <div>No Cars</div>
         ) : (
-          cars.map((car, index) => <Car car={car} key={index} />)
+          cars.map((car, index) => (
+            <Car car={car} key={index} index={index + 1} />
+          ))
         )}
       </div>
     </div>
