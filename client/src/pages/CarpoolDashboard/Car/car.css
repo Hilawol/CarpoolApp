@@ -1,5 +1,6 @@
 .car {
-  width: 200px;
+  min-width: 200px;
+  width: max-content;
   height: max-content;
   border: 2px solid #eeefee;
   border-radius: 1rem;

@@ -1,10 +1,41 @@
 .userProfile {
   background-color: #fafafa;
-  /* width: max-content; */
-  margin: auto;
+  margin: 2rem 20%;
   padding: 1rem;
 }
 
+#passengersImg {
+  height: 150px;
+  width: 200px;
+  background: url("../../Assets/passengers.png") no-repeat center center/contain;
+  margin: 0 2rem;
+}
+
+/* The animation code */
+@keyframes delayEntry {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#userProfileTop {
+  display: flex;
+}
+
+#welcomeMsg {
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
+  animation-name: delayEntry;
+  animation-duration: 3s;
+}
+#welcomeText {
+  margin: auto 1rem;
+  width: max-content;
+}
 .userProfile input {
   /* width: max-content; */
   margin: 0.5rem 1rem;

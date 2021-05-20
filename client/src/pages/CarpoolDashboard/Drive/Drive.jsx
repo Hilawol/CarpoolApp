@@ -10,8 +10,8 @@ import PassengersList from "./PassengersList/PassengersList";
 
 function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
   const [openAddCar, setOpenAddCar] = useState(false);
-  const [cars, setCars] = useState([]);
-  const [passengers, setPassengers] = useState([]);
+  const [cars, setCars] = useState(null);
+  const [passengers, setPassengers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
 
@@ -111,10 +111,8 @@ function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
           <div>{errMsg}</div>
         ) : loading ? (
           <div>Loading...</div>
-        ) : !cars.length > 0 ? (
-          <div>No Cars</div>
         ) : (
-          cars.map((car, index) => (
+          cars?.map((car, index) => (
             <Car car={car} key={index} index={index + 1} />
           ))
         )}

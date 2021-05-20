@@ -10,11 +10,6 @@ function Main({ userToken, userData, onCarpoolClick }) {
   const [carpools, setCarpools] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   console.log("MAIN GETS USERDATA:", userData);
-  //   setCarpools(userData.carpools);
-  // }, []);
-
   const getUser = async () => {
     try {
       const result = await Api.get("/users/me/carpools", {
@@ -59,7 +54,7 @@ function Main({ userToken, userData, onCarpoolClick }) {
 
   return (
     <div id="main">
-      <Button text="New Carpool" onClick={onNewCarpool} />
+      <Button text="New Carpool" onClick={onNewCarpool} className={"btn "} />
       <CreateCarpool
         userToken={userToken}
         visible={showCreateCarpool}

@@ -90,13 +90,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserDashboard() {
+export default function UserDashboard(props) {
   const [userData, setUserData] = useState(null);
   const [userToken, setUserToken] = useState(null);
   const [carpool, setCarpool] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
   const [view, setView] = useState("carpools");
+  const [firstTime, setFirstTime] = useState(false);
 
   const history = useHistory();
   const location = useLocation();
@@ -112,9 +113,14 @@ export default function UserDashboard() {
         throw new Error();
       }
 
-      if (location.pathname.includes("details")) {
+      if (props.location.state?.firstTime) {
+        setFirstTime(true);
         setView("profile");
       }
+      // if (location.pathname.includes("setaccount")) {
+      //   setFirstTime(true);
+      //   setView("profile");
+      // }
       getUser(parsedToken);
     } catch (error) {
       console.log("error:", error);
@@ -280,6 +286,7 @@ export default function UserDashboard() {
             userData={userData}
             userToken={userToken}
             updateUser={updateUser}
+            firstTime={firstTime}
           />
         ) : (
           <CarpoolDahsboard

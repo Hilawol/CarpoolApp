@@ -36,9 +36,9 @@ function PassengersList({ passengers, cars }) {
             {passengers?.map((p, i) => (
               <li key={i} id={p._id} onClick={assignHandler}>
                 {`${p.name}`}
-                <span className="assignIcon">
+                {/* <span className="assignIcon">
                   <i className="fas fa-sign-in-alt "></i>
-                </span>
+                </span> */}
               </li>
             ))}
           </ul>

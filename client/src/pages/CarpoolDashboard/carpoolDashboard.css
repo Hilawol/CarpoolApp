@@ -63,10 +63,9 @@
 }
 
 .carsSection {
-  min-height: 50vh;
+  min-height: 174px;
 }
 .passengersContainer {
   background-color: thistle;
-  /* width: 100%; */
   height: 100vh;
 }
