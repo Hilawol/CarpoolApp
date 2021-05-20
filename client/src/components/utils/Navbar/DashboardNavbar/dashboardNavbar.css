@@ -1,5 +1,14 @@
 .dashboardNavbar {
   width: 100vw;
-  height: 56px;
-  background-color: khaki;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.5);
+  background: url("../../../../Assets/navBKG.png") no-repeat center center/cover;
+}
+
+.navBtn.dash {
+  font-size: 3rem;
+}
+
+.dashboardNavbar .fa-car {
+  color: white;
 }

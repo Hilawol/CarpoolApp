@@ -11,3 +11,7 @@
   min-height: calc(100vh - 64px);
   padding: 1rem;
 }
+
+.carpoolsContainer {
+  display: flex;
+}

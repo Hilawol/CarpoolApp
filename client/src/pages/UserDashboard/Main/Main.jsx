@@ -54,26 +54,33 @@ function Main({ userToken, userData, onCarpoolClick }) {
 
   return (
     <div id="main">
-      <Button text="New Carpool" onClick={onNewCarpool} className={"btn "} />
+      <Button
+        text="New Carpool"
+        onClick={onNewCarpool}
+        className={"btn inviteBtn"}
+      />
       <CreateCarpool
         userToken={userToken}
         visible={showCreateCarpool}
         onCreateCarpool={onCreateCarpool}
         onCloseCreateCarpool={onCloseCreateCarpool}
       />
-      {loading ? (
-        <div>Loading...</div>
-      ) : carpools?.length > 0 ? (
-        carpools.map((carpool, index) => (
-          <CarpoolComponent
-            key={index}
-            carpool={carpool}
-            onCarpoolClick={onCarpoolClick}
-          />
-        ))
-      ) : (
-        <h3>No carpools yet</h3>
-      )}
+
+      <div className="carpoolsContainer">
+        {loading ? (
+          <div>Loading...</div>
+        ) : carpools?.length > 0 ? (
+          carpools.map((carpool, index) => (
+            <CarpoolComponent
+              key={index}
+              carpool={carpool}
+              onCarpoolClick={onCarpoolClick}
+            />
+          ))
+        ) : (
+          <h3>No carpools yet</h3>
+        )}
+      </div>
     </div>
   );
 }

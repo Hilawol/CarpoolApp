@@ -21,7 +21,6 @@ function App() {
         <BrowserRouter>
         <Switch>
         <Route path='/myProfile'  component={UserDashboard}/>
-        <Route path='/myProfile'  component={DashboardNavbar}/>
           <div>
           <Navbar />
           <Route path='/' exact component={LandingPage}/>

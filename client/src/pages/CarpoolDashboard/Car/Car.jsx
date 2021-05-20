@@ -14,7 +14,7 @@ function Car({ car, index }) {
     <div className="car">
       <strong className="driver">Driver:</strong>
       <span>{`${car.driver.firstName} ${car.driver.lastName}`}</span>
-      <i className="fas fa-user-plus icon" onClick={() => {}}></i>
+      {/* <i className="fas fa-user-plus icon" onClick={() => {}}></i> */}
       <br />
 
       <div className="carAvailability">

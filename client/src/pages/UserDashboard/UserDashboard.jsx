@@ -110,7 +110,7 @@ export default function UserDashboard(props) {
         parsedToken = JSON.parse(token);
         setUserToken(parsedToken);
       } else {
-        throw new Error();
+        history.push("/login");
       }
 
       if (props.location.state?.firstTime) {

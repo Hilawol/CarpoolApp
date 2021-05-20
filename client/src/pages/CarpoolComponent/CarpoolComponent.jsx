@@ -48,10 +48,10 @@ export default function Carpool({ carpool, onCarpoolClick }) {
             {moment(carpool.carpool.date).format("DD.MM.YYYY HH:mm")}
             {/* {carpool.carpool.date} */}
           </Typography>
-          <Typography variant="body2" component="p" color="textSecondary">
+          {/* <Typography variant="body2" component="p" color="textSecondary">
             {carpool.carpool.owner ? "Carpool owner" : ""}
             <br />
-          </Typography>
+          </Typography> */}
         </CardContent>
       </Card>
     </div>
