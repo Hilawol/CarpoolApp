@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./drive.css";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
-import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import AddCar from "../../AddCar/AddCar";
 import Api from "../../../Api/Api";
 import Car from "../Car/Car";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PassengersList from "./PassengersList/PassengersList";
 
-function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
+function Drive({ id, type, to, date, user, userToken }) {
   const [openAddCar, setOpenAddCar] = useState(false);
   const [cars, setCars] = useState(null);
   const [passengers, setPassengers] = useState(null);
@@ -16,16 +14,13 @@ function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
   const [errMsg, setErrMsg] = useState(null);
 
   useEffect(() => {
-    console.log("drive useeffect user:", user);
     setLoading(true);
     const getCars = async () => {
       try {
-        // setLoading(true);
         const result = await Api.get(`/drives/${id}/cars`, {
           headers: { Authorization: `Bearer ${userToken}` },
         });
         setCars(result.data);
-        // setLoading(false);
       } catch (error) {
         setErrMsg("An error ocurred. Please try again.");
         setLoading(false);
@@ -37,7 +32,6 @@ function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
         const result = await Api.get(`/passengers/drive/${id}`, {
           headers: { Authorization: `Bearer ${userToken}` },
         });
-        console.log("passengers:", result.data);
         setPassengers(result.data);
       } catch (error) {
         setErrMsg("An error ocurred. Please try again.");
@@ -58,7 +52,6 @@ function Drive({ id, type, from, to, date, user, userToken, onAddPassenger }) {
   };
 
   const onCreateCar = async (cars) => {
-    console.log("create car:", cars);
     setCars(cars);
     onCloseAddCar();
   };

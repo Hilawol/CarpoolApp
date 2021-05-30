@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -20,7 +22,7 @@ app.use('/api/drives', driveRoute);
 app.use('/api/passengers', passengerRoute);
 
 //connect to db with mongoose
-mongoose.connect("mongodb+srv://hila_admin:J2ughdciUs7PR9d@cluster0.dhhlk.mongodb.net/carpoolApp?retryWrites=true&w=majority", {
+mongoose.connect(process.env.DATABASEURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
