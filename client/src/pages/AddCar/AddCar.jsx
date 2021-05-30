@@ -34,7 +34,6 @@ function AddCar({ driveId, driver, userToken, visible, onClose, onAdd }) {
               headers: { Authorization: `Bearer ${userToken}` },
             }
           );
-          console.log(result.data);
           return onAdd(result.data);
         } catch (error) {
           setErrMsg("An error ocuured. Please tru again.");
@@ -49,33 +48,33 @@ function AddCar({ driveId, driver, userToken, visible, onClose, onAdd }) {
   };
 
   const content = (
-    <div className="addCardModal card">
-      <div className="cardHeader">
-        <i className="fas fa-times closeBtn" onClick={onCloseClick}></i>
+    <div className='addCardModal card'>
+      <div className='cardHeader'>
+        <i className='fas fa-times closeBtn' onClick={onCloseClick}></i>
       </div>
       <span>Add Car</span>
       <hr />
-      <p className="driverName">Driver: {driverName}</p>
+      <p className='driverName'>Driver: {driverName}</p>
       <Input
-        type="Number"
-        min="1"
-        max="10"
-        placeholder="Passengers Capacity"
+        type='Number'
+        min='1'
+        max='10'
+        placeholder='Passengers Capacity'
         onChange={(event) => capacityHandler(event)}
         value={capacity}
       />
-      {errMsg ? <p className="errMsg">{errMsg}</p> : null}
-      <div className="actionDiv">
+      {errMsg ? <p className='errMsg'>{errMsg}</p> : null}
+      <div className='actionDiv'>
         <Button
-          type="submit"
-          text="Cancel"
-          variant="text"
+          type='submit'
+          text='Cancel'
+          variant='text'
           onClick={onCloseClick}
         />
         <Button
-          type="submit"
-          text="Add Car"
-          variant="solid"
+          type='submit'
+          text='Add Car'
+          variant='solid'
           onClick={onAddClick}
         />
       </div>
